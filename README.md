@@ -16,7 +16,9 @@ This is a way to automatically curate discord servers. Specifically for meme cha
 6. Make sure you have the correct node/npm version specified within the "engines" object in package.json. If you're on windows you probably [need this](https://github.com/coreybutler/nvm-windows) to manage node versions.
 7. Once installed you'll need to create a secrets.js file within src. For example: `module.exports = {
 	TOKEN: 'Your cool token goes here from step #3',
-};` This is what will be used to login within `src/index.js`
+};`
+   This is what will be used to login within `src/index.js`.
+8. You are done. Enjoy ^^
 
 ## Directory
 
