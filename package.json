@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "src/entry.ts",
 	"scripts": {
+		"lint": "eslint --ext .js --ext .ts",
 		"start": "nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -11,10 +12,8 @@
 	"author": "rc4l",
 	"license": "ISC",
 	"dependencies": {
-		"discord.js": "^12.3.1",
-		"mongodb": "^3.6.0",
-		"mongoose": "^5.10.2",
-		"redis": "^3.0.2"
+		"discord.js": "^14.13.0",
+		"prisma": "^5.1.1"
 	},
 	"engines": {
 		"npm": "9.8.1",
@@ -27,6 +26,9 @@
 		"@babel/preset-env": "^7.22.10",
 		"@babel/preset-typescript": "^7.22.5",
 		"@types/node": "^20.5.1",
+		"@typescript-eslint/eslint-plugin": "^6.4.1",
+		"@typescript-eslint/parser": "^6.4.1",
+		"eslint": "^8.47.0",
 		"nodemon": "^3.0.1",
 		"typescript": "^5.1.6"
 	}

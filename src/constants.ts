@@ -1,1 +1,2 @@
-export const MSG_HELP = "Still working on this...";
+export const LIKE = '👍';
+export const DISLIKE = '👎';
