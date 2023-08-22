@@ -16,10 +16,10 @@ The goal of this project is to have a scoring system for non-text messages on Di
 - Make sure you have the correct node/npm version specified within the "engines" object in package.json. If you're on windows you probably [need this](https://github.com/coreybutler/nvm-windows) to manage node versions.
 - Create an application + bot from the [Discord Developer Portal](https://discord.com/developers/applications), save the token somewhere, and also enable `Message Content Intent` within the `Bot` menu on their portal. Also make sure the bot is in a discord server and has the following permissions enabled: 
 `
-Read Messages/View Channels
-Send Messages
-Manage Messages
-Read Message History
+Read Messages/View Channels, 
+Send Messages, 
+Manage Messages, 
+Read Message History, 
 Add Reactions
 `
 This should all add up to `76864` within their bot permissions calculator inside the portal. 
