@@ -16,7 +16,7 @@ datasource db {
 model WorldUser {
   id      BigInt @id @unique // This uses your discord accounts ID
   worldId BigInt @default(1)
-  world   World @relation(fields: [worldId], references: [id])
+  world   World  @relation(fields: [worldId], references: [id])
 
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
@@ -44,7 +44,7 @@ model Server {
   id      BigInt @id @unique // This uses the discord server ID
   worldId BigInt @default(1)
 
-  world     World      @relation(fields: [worldId], references: [id])
+  world     World       @relation(fields: [worldId], references: [id])
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   users     LocalUser[]
@@ -56,6 +56,6 @@ model World {
   id        BigInt      @id @unique @default(autoincrement())
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
-  users     WorldUser[] 
+  users     WorldUser[]
   servers   Server[]
 }
