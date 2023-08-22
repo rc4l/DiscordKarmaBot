@@ -1,5 +1,8 @@
 # Hide keys and whatnot.
-/src/secrets.js
+/src/secrets.*
+
+# Typescript
+/build/
 
 # Logs
 logs
