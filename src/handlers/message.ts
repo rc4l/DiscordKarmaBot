@@ -1,10 +1,11 @@
 import { LIKE, DISLIKE } from '../constants';
+import { getOrCreateUser } from '../queries/get-user';
 
-export const processMessage = (client: any, message: UserMessage) => {
+export const processMessage = (client: any, message: UserMessage, prisma: any) => {
 	if (message.author.bot === true) return;
 	// const currentChannel = client.channels.cache.get(message.channel.id);
 	// currentChannel.send('' + message.attachments.first());
-
+	getOrCreateUser(message.author.id, message.guild.id, message.author.username, prisma);
 
 	if (message.attachments.first()) processInitialReactions(message);
 };
@@ -44,7 +45,7 @@ interface Channel {
 }
 
 interface MessageAuthor {
-	id: string;
+	id: number;
 	username: string;
 	bot: boolean;
 	discriminator: string;

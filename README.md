@@ -16,10 +16,10 @@ The goal of this project is to have a scoring system for non-text messages on Di
 - Make sure you have the correct node/npm version specified within the "engines" object in package.json. If you're on windows you probably [need this](https://github.com/coreybutler/nvm-windows) to manage node versions.
 - Create an application + bot from the [Discord Developer Portal](https://discord.com/developers/applications), save the token somewhere, and also enable `Message Content Intent` within the `Bot` menu on their portal. Also make sure the bot is in a discord server and has the following permissions enabled: 
 `
-Read Messages/View Channels, 
-Send Messages, 
-Manage Messages, 
-Read Message History, 
+Read Messages/View Channels,
+Send Messages,
+Manage Messages,
+Read Message History,
 Add Reactions
 `
 This should all add up to `76864` within their bot permissions calculator inside the portal. 
@@ -30,7 +30,7 @@ This should all add up to `76864` within their bot permissions calculator inside
 1. Clone this repo
 2. `npm i` to install dependencies
 3. `npx prisma init` to setup prisma
-4. Throw in your postgres credentials within the newly generated `./.env` file. [Supplementary information here if confused](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgresql).
+4. Throw in your postgres credentials within the newly generated `./.env` file. [Supplementary information here if confused](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgresql). Also run `npx prisma migrate dev --name init`; any changes made to the schema requires this to be ran every time.
 5. You'll also need to create a `secrets.js` file inside `./src` with an exported `TOKEN` variable for the Discord bot itself. For example: `module.exports = {
 	TOKEN: 'Your cool token goes here from the prerequisites',
 };`

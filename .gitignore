@@ -1,6 +1,5 @@
 # Hide keys and whatnot.
 /src/secrets.*
-/prisma/
 
 # Typescript
 /build/

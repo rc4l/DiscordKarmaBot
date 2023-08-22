@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 1 -> 1 relationship with the world
+// 1 -> Many relationship with all servers theyre in
+// 1 -> Many relationship with all local copies of same person
+model WorldUser {
+  id      BigInt @id @unique // This uses your discord accounts ID
+  worldId BigInt @default(1)
+  world   World @relation(fields: [worldId], references: [id])
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  globalBalance Int         @default(0)
+  lastKnownName String      @default("?")
+  localUsers    LocalUser[]
+}
+
+// 1 -> 1 relationship for the server
+model LocalUser {
+  id              BigInt    @id // This is the discord server id!
+  discordServerId BigInt    @default(0)
+  worldUserId     BigInt    @default(0)
+  server          Server    @relation(fields: [discordServerId], references: [id])
+  worldUser       WorldUser @relation(fields: [worldUserId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  balance   Int      @default(0)
+}
+
+// 1 -> Many relationship for all local users
+// 1 -> 1 relationship for the world
+model Server {
+  id      BigInt @id @unique // This uses the discord server ID
+  worldId BigInt @default(1)
+
+  world     World      @relation(fields: [worldId], references: [id])
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  users     LocalUser[]
+}
+
+// 1 -> Many relationship for all servers
+// 1 -> Many relationship for all world users
+model World {
+  id        BigInt      @id @unique @default(autoincrement())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  users     WorldUser[] 
+  servers   Server[]
+}
