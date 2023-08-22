@@ -12,6 +12,7 @@
 	"author": "rc4l",
 	"license": "ISC",
 	"dependencies": {
+		"@prisma/client": "^5.1.1",
 		"discord.js": "^14.13.0",
 		"prisma": "^5.1.1"
 	},

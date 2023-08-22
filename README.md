@@ -30,8 +30,8 @@ This should all add up to `76864` within their bot permissions calculator inside
 1. Clone this repo
 2. `npm i` to install dependencies
 3. `npx prisma init` to setup prisma
-4. Throw in your postgres credentials within the generated schema file inside `./prisma/schema.prisma`. [Details here](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgresql).
-5. Once installed you'll need to create a `secrets.js` file inside `./src` with a `TOKEN`. For example: `module.exports = {
+4. Throw in your postgres credentials within the newly generated `./.env` file. [Supplementary information here if confused](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgresql).
+5. You'll also need to create a `secrets.js` file inside `./src` with an exported `TOKEN` variable for the Discord bot itself. For example: `module.exports = {
 	TOKEN: 'Your cool token goes here from the prerequisites',
 };`
    This is what will be used to login within `src/index.js`.
