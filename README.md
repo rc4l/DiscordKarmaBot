@@ -18,7 +18,7 @@ This is a way to automatically curate discord servers. Specifically for meme cha
 	TOKEN: 'Your cool token goes here from step #3',
 };`
    This is what will be used to login within `src/index.js`.
-8. You are done. Enjoy ^^
+8. You are done and can now start the bot by running `npm run start`. Have fun =D
 
 ## Directory
 
