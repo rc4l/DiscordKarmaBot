@@ -4,11 +4,12 @@ The goal of this project is to have a scoring system for non-text messages on Di
 
 ## Tech stack
 
-- Discord.js - Helper library to make working with Discord's API easier
+- Discord.js - Helper library to make working with Discord's API easier.
 - Typescript - Wanted to learn this; supposedly makes it harder to break stuff compared to vanilla Javascript. Tbh, I just wanna learn it.
-- Babel - For the ES6 benefits on code syntax
-- Nodemon - Hot reloading
-- Postgres + Prisma - Relational database to store settings per server, users, etc. Prisma is used as a wrapper within Node to make life easier.
+- Babel - For the ES6 benefits on code syntax.
+- Nodemon - Hot reloading.
+- Postgres + Prisma - Relational database to store settings per server, users, etc. Prisma is an ORM (Object relational mapping) library to elegantly generate Postgres queries.
+- Redis - Caching through the ioRedis library.
 
 ## Prerequisites
 

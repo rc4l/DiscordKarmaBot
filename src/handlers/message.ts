@@ -1,11 +1,13 @@
 import { LIKE, DISLIKE } from '../constants';
-import { getOrCreateUser } from '../queries/get-user';
+import { createServer } from '../queries/create-server';
+import { createUser } from '../queries/create-user';
 
-export const processMessage = (client: any, message: UserMessage, prisma: any) => {
+export const processMessage = async (client: any, message: UserMessage, prisma: any) => {
 	if (message.author.bot === true) return;
 	// const currentChannel = client.channels.cache.get(message.channel.id);
 	// currentChannel.send('' + message.attachments.first());
-	getOrCreateUser(message.author.id, message.guild.id, message.author.username, prisma);
+	await createServer(Number(message.channel.id), prisma);
+	await createUser(Number(message.author.id), Number(message.guild.id), message.author.username, prisma);
 
 	if (message.attachments.first()) processInitialReactions(message);
 };
