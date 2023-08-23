@@ -1,3 +1,5 @@
+import { generalizedUpsert } from '../queries/generalized-upsert';
+
 export const processLoad = async (prisma: any) => {
-	console.log('Loading...');
+	await generalizedUpsert({ modelName: 'world', uniqueId: 1, kvpArray: [], prisma });
 };
