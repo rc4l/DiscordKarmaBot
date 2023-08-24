@@ -1,16 +1,12 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import { processMessage } from './handlers/message';
 import { processLoad } from './handlers/load';
-import { TOKEN } from './secrets';
+import { processCommand } from './handlers/command';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { createPrismaRedisCache } from 'prisma-redis-middleware';
-import Redis from 'ioredis';
 
 // Postgres connection
 const prismaClient = new PrismaClient();
-
-// Caching
-const redis = new Redis();
 
 // https://github.com/Asjas/prisma-redis-middleware
 const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
@@ -21,7 +17,7 @@ const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
 		{ model: 'World', cacheTime: 60 },
 		{ model: 'Server', cacheTime: 60 },
 	],
-	storage: { type: 'redis', options: { client: redis, invalidation: { referencesTTL: 300 }, log: console } },
+	storage: { type: 'memory', options: { size: 2048 } },
 	cacheTime: 300,
 	excludeModels: [],
 	excludeMethods: [],
@@ -36,6 +32,7 @@ const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
 	},
 });
 
+
 prismaClient.$use(cacheMiddleware);
 
 // See https://discord.com/developers/docs/topics/gateway#list-of-intents
@@ -48,8 +45,9 @@ const client = new Client({
 	],
 });
 
+
 client.once('ready', async () => {
-	processLoad(prismaClient).then(async () => {
+	processLoad(client, prismaClient).then(async () => {
 		await prismaClient.$disconnect();
 	}).catch(async (e) => {
 		console.error(e);
@@ -64,5 +62,11 @@ client.on(Events.MessageCreate, (message: any) => {
 	processMessage(client, message, prismaClient);
 });
 
+// Slash commands
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isCommand()) return;
+	await processCommand(client, interaction);
+});
+
 // If you cloned this repo, you will need to make your own secrets.js file with your own token.
-client.login(TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN);

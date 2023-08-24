@@ -43,7 +43,7 @@ model LocalUser {
 model Server {
   id      BigInt @id @unique // This uses the discord server ID
   worldId BigInt 
-
+  settings Json? @default("{}")
   world     World?       @relation(fields: [worldId], references: [id])
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt

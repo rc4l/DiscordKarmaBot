@@ -6,16 +6,16 @@
 	"scripts": {
 		"lint": "eslint --ext .js --ext .ts",
 		"start": "nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"updatecommands": "ts-node ./scripts/register-commands.ts"
 	},
 	"keywords": [],
 	"author": "rc4l",
 	"license": "ISC",
 	"dependencies": {
 		"@prisma/client": "^5.2.0",
-		"@types/ioredis": "5.0.0",
 		"discord.js": "^14.13.0",
-		"ioredis": "5.3.2",
+		"dotenv": "^16.3.1",
 		"prisma": "^5.2.0",
 		"prisma-redis-middleware": "4.8.0"
 	},
@@ -34,6 +34,7 @@
 		"@typescript-eslint/parser": "^6.4.1",
 		"eslint": "^8.47.0",
 		"nodemon": "^3.0.1",
+		"ts-node": "^10.9.1",
 		"typescript": "^5.1.6"
 	}
 }
