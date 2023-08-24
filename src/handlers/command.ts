@@ -8,6 +8,14 @@ export const processCommand = async (client: Client, interaction: any) => {
 		return;
 	}
 
-	await interaction.deferReply();
-	slashCommand.run(client, interaction);
+	switch (interaction.commandName) {
+	/* case 'setup':
+		slashCommand.run(client, interaction);
+		break; */
+	default:
+		await interaction.deferReply();
+		slashCommand.run(client, interaction);
+		break;
+	}
+
 };

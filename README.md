@@ -44,7 +44,7 @@ These steps need to be followed whenever a new command is added, removed, or if 
 1. Define it within the commands folder within its own file. You can use the other files in that folder as examples.
 2. Import the file you just made and define it within the constants file. Make sure it gets appended to the array and the name is correct.
 3. Run `npm run updatecommands`.
-4. Next time you run your bot the command should be available.
+4. The list of commands should now be updates and you can run your bot again via `npm run start` to validate.
 
 ## Directory
 
