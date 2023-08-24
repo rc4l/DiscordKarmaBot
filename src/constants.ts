@@ -1,7 +1,6 @@
 import { CommandInteraction, ChatInputApplicationCommandData, Client } from 'discord.js';
 export const LIKE = '👍';
 export const DISLIKE = '👎';
-export const GITHUB_URL = 'https://github.com/rc4l/DiscordKarmaBot';
 
 export interface upsertParams {
     modelName: string;

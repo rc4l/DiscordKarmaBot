@@ -39,6 +39,7 @@ This should all add up to `76864` within their bot permissions calculator inside
 8. Run `npm run start` again. `/help` should now work as a valid command among others. You are now ready to develop :D
 
 ## Adding or removing /commands (slash commands)
+These steps need to be followed whenever a new command is added, removed, or if you modified anything aside from the `run` function within your command. The reason it's designed this way is because [there's a daily limit on command registration requests](https://discordjs.guide/creating-your-bot/command-deployment.html#command-registration) so simply running it every time on startup when we don't need to would eventually halt development for a day. Therefore this is a separate process entirely.
 
 1. Define it within the commands folder within its own file. You can use the other files in that folder as examples.
 2. Import the file you just made and define it within the constants file. Make sure it gets appended to the array and the name is correct.
