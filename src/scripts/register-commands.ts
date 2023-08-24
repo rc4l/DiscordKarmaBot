@@ -2,7 +2,7 @@
 // This only needs to be ran when commands are added or removed. It does not need to be ran when command code is changed.
 
 import { Client, GatewayIntentBits } from 'discord.js';
-import { Commands } from '../src/constants';
+import { Commands } from '../constants';
 import dotenv from 'dotenv';
 dotenv.config();
 

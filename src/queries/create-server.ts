@@ -6,7 +6,7 @@ export const createServer = async (serverId: number, prisma: any) => {
 	// Initial creations...
 	let all = [
 		generalizedUpsert({ modelName: 'server', uniqueId: sid, kvpArray: [{ k: 'world', v: { connect: { id: 1 } } }], prisma }),
-		generalizedUpsert({ modelName: 'localUser', uniqueId: sid, kvpArray: [], prisma }),
+		generalizedUpsert({ modelName: 'serverSettings', uniqueId: sid, kvpArray: [], prisma }),
 	];
 	let results = await Promise.all(all);
 	for (const r of results) {
@@ -16,7 +16,7 @@ export const createServer = async (serverId: number, prisma: any) => {
 	// Update relations
 	all = [
 		generalizedUpdate({ modelName: 'world', uniqueId: 1, kvpArray: [{ k: 'servers', v: { connect: { id: sid } } }], prisma }),
-		generalizedUpdate({ modelName: 'server', uniqueId: sid, kvpArray: [], prisma }),
+		generalizedUpdate({ modelName: 'server', uniqueId: sid, kvpArray: [{ k: 'settings', v: { connect: { id: sid } } }], prisma }),
 	];
 	results = await Promise.all(all);
 	for (const r of results) {
@@ -24,3 +24,4 @@ export const createServer = async (serverId: number, prisma: any) => {
 	}
 	return true;
 };
+

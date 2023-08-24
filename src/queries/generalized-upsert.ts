@@ -20,8 +20,8 @@ export const generalizedUpsert = async (params: upsertParams) => {
 			d.update[kvp.k] = kvp.v;
 		}
 	}
-	console.log('Model name: ' + modelName);
-	console.log(JSON.stringify(d, null, '\t'));
+	// console.log('Model name (upsert): ' + modelName);
+	// console.log(JSON.stringify(d, null, '\t'));
 
 	const ret = prisma[modelName].upsert(d);
 

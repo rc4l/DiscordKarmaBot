@@ -8,10 +8,14 @@ export const processMessage = async (client: any, message: UserMessage, prisma: 
 	// const currentChannel = client.channels.cache.get(message.channel.id);
 	// currentChannel.send('' + message.attachments.first());
 
-	const userExists = await getUserLocal(Number(message.author.id), Number(message.guild.id), prisma);
+	const channelId = Number(message.channel.id);
+	const serverId = Number(message.guild.id);
+	const userId = Number(message.author.id);
+
+	const userExists = await getUserLocal(userId, serverId, prisma);
 	if(!userExists) {
-		await createServer(Number(message.channel.id), prisma);
-		await createUser(Number(message.author.id), Number(message.guild.id), message.author.username, prisma);
+		await createServer(serverId, prisma);
+		await createUser(userId, serverId, message.author.username, prisma);
 	}
 
 	if (message.attachments.first()) processInitialReactions(message);

@@ -27,4 +27,5 @@ export interface Command extends ChatInputApplicationCommandData {
 
 import { help } from './commands/help';
 import { setup } from './commands/setup';
-export const Commands: Command[] = [help, setup];
+import { unsetup } from './commands/unsetup';
+export const Commands: Command[] = [help, setup, unsetup];

@@ -16,6 +16,7 @@ const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
 		{ model: 'LocalUser', cacheTime: 30 },
 		{ model: 'World', cacheTime: 60 },
 		{ model: 'Server', cacheTime: 60 },
+		{ model: 'ServerSettings', cacheTime: 9999 },
 	],
 	storage: { type: 'memory', options: { size: 2048 } },
 	cacheTime: 300,
