@@ -7,7 +7,6 @@ export const generalizedUpsert = async (params: upsertParams) => {
 	const d : any = { where: {
 		id: Number(uniqueId) },
 	update: {
-		id: Number(uniqueId),
 	},
 	create: {
 		id: Number(uniqueId),

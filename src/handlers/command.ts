@@ -20,13 +20,12 @@ export const processCommand = async (client: Client, interaction: any) => {
 			slashCommand.run(client, interaction);
 			break;
 		default: // All other commands are only available if we're in a valid environment, which requires setupserver to run.
-			ve = await isValidEnvironment(interaction.guildId);
-			if (ve) {
-				await interaction.deferReply();
-				interaction.followUp({ content: 'Environment validation failed. Please report this to https://github.com/rc4l/DiscordKarmaBot' });
+			await interaction.deferReply();
+			ve = await isValidEnvironment(Number(interaction.guildId));
+			if (ve?.pointOfFailure) {
+				interaction.followUp({ content: ve.pointOfFailure + '\nIf you believe this to be an error, please report this as a bug at https://github.com/rc4l/DiscordKarmaBot' });
 				return;
 			}
-			await interaction.deferReply();
 			slashCommand.run(client, interaction);
 			break;
 	}

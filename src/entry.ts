@@ -19,7 +19,7 @@ const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
 		{ model: 'ServerSettings', cacheTime: 9999 },
 		{ model: 'ChannelSettings', cacheTime: 9999 },
 	],
-	storage: { type: 'memory', options: { size: 2048 } },
+	storage: { type: 'memory', options: { size: 2048, invalidation: true } },
 	cacheTime: 300,
 	excludeModels: [],
 	excludeMethods: [],

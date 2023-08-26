@@ -1,6 +1,6 @@
 import { CommandInteraction, Client, ApplicationCommandOptionData, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from '../constants';
-import { interactionIsInDMs, stringifyJSONWithBigIntSupport } from '../utils';
+import { interactionIsInDMs, getSingleNestedObjectChanges } from '../utils';
 import { prismaClient } from '../entry';
 import { getChannelSettings } from '../queries/get-channel-settings';
 import { defaultChannelSettings } from '../settings/configure';
@@ -29,13 +29,17 @@ export const setupchannel: Command = {
 		}
 
 		const currentSettings = (await getChannelSettings(Number(interaction.channelId), prismaClient))?.settings || {};
+
+
 		const updatedSettings = { ...defaultChannelSettings, ...currentSettings };
+		const forbidTextOption = await interaction.options.get('forbid-text')?.value;
+		if (forbidTextOption !== undefined) updatedSettings.isTextForbidden = forbidTextOption === undefined ? updatedSettings.isTextForbidden : forbidTextOption;
+
 		await registerChannelSettings(updatedSettings, Number(interaction.channelId), Number(interaction.guildId), prismaClient);
-		content = stringifyJSONWithBigIntSupport((await getChannelSettings(Number(interaction.channelId), prismaClient))?.settings);
 
 		await interaction.followUp({
 			ephemeral: true,
-			content,
+			content: getSingleNestedObjectChanges(currentSettings, updatedSettings),
 		});
 	},
 };

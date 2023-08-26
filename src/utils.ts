@@ -44,12 +44,29 @@ export const isValidEnvironment = async (serverId: number) => {
 		await getServerSettings(serverId, prismaClient),
 	];
 	const results = await Promise.all(all);
-	for (const r of results) {
-		if (!r) {
-			console.log('Environment not setup for server: ' + serverId);
-			return null;
+	if (!results[0]) {return { pointOfFailure: 'World environment not setup. This is a global issue.' };}
+	else if (!results[1]) {return { pointOfFailure: `Server environment for ${serverId} not setup. This is an issue with your server (did you run setupserver first?)` };}
+	else if (!results[2]) {return { pointOfFailure: `Server settings for ${serverId} not setup. This is an issue with your server (did you run setupserver first?)` };}
+
+	return {};
+};
+
+export const getSingleNestedObjectChanges = (obj1: any, obj2: any) => {
+	let changes = '';
+	for(const [key, value] of Object.entries(obj2)) {
+		if (value === Object) {
+			for(const [subKey, subValue] of Object.entries(value)) {
+				if(subValue !== obj1[key][subKey]) {
+					changes += `${key}.${subKey}: ${obj1[key][subKey]} -> ${subValue}\n`;
+				}
+			}
+		}
+		else if(value !== obj1[key]) {
+			changes += `${key}: ${obj1[key]} -> ${value}\n`;
 		}
 	}
-
-	return true;
+	if (changes === '') {
+		changes = 'No changes detected.';
+	}
+	return changes;
 };
