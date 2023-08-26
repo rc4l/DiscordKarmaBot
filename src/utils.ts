@@ -54,7 +54,7 @@ export const isValidEnvironment = async (serverId: number) => {
 export const getSingleNestedObjectChanges = (obj1: any, obj2: any) => {
 	let changes = '';
 	for(const [key, value] of Object.entries(obj2)) {
-		if (value === Object) {
+		if (value && typeof value == 'object') {
 			for(const [subKey, subValue] of Object.entries(value)) {
 				if(subValue !== obj1[key][subKey]) {
 					changes += `${key}.${subKey}: ${obj1[key][subKey]} -> ${subValue}\n`;

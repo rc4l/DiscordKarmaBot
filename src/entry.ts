@@ -1,7 +1,8 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
+import { Client, Events, GatewayIntentBits, MessageReaction, PartialMessageReaction, PartialUser, User } from 'discord.js';
 import { processMessage } from './handlers/message';
 import { processLoad } from './handlers/load';
 import { processCommand } from './handlers/command';
+import { processReaction } from './handlers/reactions';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { createPrismaRedisCache } from 'prisma-redis-middleware';
 
@@ -67,6 +68,11 @@ client.on(Events.MessageCreate, (message: any) => {
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isCommand()) return;
 	await processCommand(client, interaction);
+});
+
+// Reactions
+client.on(Events.MessageReactionAdd, async (reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser) => {
+	await processReaction(client, reaction, user);
 });
 
 // If you cloned this repo, you will need to make your own secrets.js file with your own token.
