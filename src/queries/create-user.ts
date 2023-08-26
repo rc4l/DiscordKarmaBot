@@ -1,4 +1,4 @@
-import { generalizedUpsert } from './generalized-upsert';
+import { generalizedFindAndCreate } from './generalized-find-and-create';
 import { generalizedUpdate } from './generalized-update';
 
 // Must be ran after server creation
@@ -8,8 +8,8 @@ export const createUser = async (userId: number, serverId: number, username: str
 
 	// Initial creations...
 	let all = [
-		generalizedUpsert({ modelName: 'worldUser', uniqueId: uid, kvpArray: [{ k: 'lastKnownName', v: username }, { k: 'world', v: { connect: { id: 1 } } }], prisma }),
-		generalizedUpsert({ modelName: 'localUser', uniqueId: sid, kvpArray: [{ k: 'server', v: { connect: { id: sid } } }], prisma }),
+		generalizedFindAndCreate({ modelName: 'worldUser', uniqueId: uid, kvpArray: [{ k: 'lastKnownName', v: username }, { k: 'world', v: { connect: { id: 1 } } }], prisma }),
+		generalizedFindAndCreate({ modelName: 'localUser', uniqueId: sid, kvpArray: [{ k: 'server', v: { connect: { id: sid } } }], prisma }),
 	];
 	let results = await Promise.all(all);
 	for (const r of results) {

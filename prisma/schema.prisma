@@ -41,15 +41,25 @@ model Server {
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   users            LocalUser[]
-  settings         ServerSettings? @relation(fields: [serverSettingsId], references: [id])
-  serverSettingsId BigInt?
+  channelSettings  ChannelSettings[] 
+  settings         ServerSettings? 
 }
 
+// These two settings tables are exactly the same fields wise but are separated due to their different IDs. It may collide if we combine them into one.
 model ServerSettings {
-  id        BigInt   @id @unique
+  id        BigInt   @id @unique // Server ID
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  server    Server  []
+  server    Server  @relation(fields: [id], references: [id])
+  settings Json? @default("{}")
+}
+
+model ChannelSettings {
+  id        BigInt   @id @unique // Channel ID
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  serverId  BigInt
+  server    Server  @relation(fields: [serverId], references: [id])
   settings Json? @default("{}")
 }
 

@@ -6,17 +6,18 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { createPrismaRedisCache } from 'prisma-redis-middleware';
 
 // Postgres connection
-const prismaClient = new PrismaClient();
+export const prismaClient = new PrismaClient();
 
 // https://github.com/Asjas/prisma-redis-middleware
 const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
 	models: [
 		// Time is in seconds
-		{ model: 'WorldUser', cacheTime: 30 },
-		{ model: 'LocalUser', cacheTime: 30 },
-		{ model: 'World', cacheTime: 60 },
-		{ model: 'Server', cacheTime: 60 },
+		{ model: 'WorldUser', cacheTime: 60 },
+		{ model: 'LocalUser', cacheTime: 60 },
+		{ model: 'World', cacheTime: 120 },
+		{ model: 'Server', cacheTime: 120 },
 		{ model: 'ServerSettings', cacheTime: 9999 },
+		{ model: 'ChannelSettings', cacheTime: 9999 },
 	],
 	storage: { type: 'memory', options: { size: 2048 } },
 	cacheTime: 300,
@@ -45,7 +46,6 @@ const client = new Client({
 		GatewayIntentBits.MessageContent,
 	],
 });
-
 
 client.once('ready', async () => {
 	processLoad(client, prismaClient).then(async () => {

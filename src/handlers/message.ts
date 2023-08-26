@@ -1,10 +1,13 @@
 import { LIKE, DISLIKE } from '../constants';
-import { createServer } from '../queries/create-server';
 import { createUser } from '../queries/create-user';
 import { getUserLocal } from '../queries/get-user-local';
+import { isValidEnvironment } from '../utils';
 
 export const processMessage = async (client: any, message: UserMessage, prisma: any) => {
-	if (message.author.bot === true) return;
+	const v = await isValidEnvironment(Number(message.guild.id));
+	if (message.author.bot === true || !v) {
+		return;
+	}
 	// const currentChannel = client.channels.cache.get(message.channel.id);
 	// currentChannel.send('' + message.attachments.first());
 
@@ -12,9 +15,9 @@ export const processMessage = async (client: any, message: UserMessage, prisma: 
 	const serverId = Number(message.guild.id);
 	const userId = Number(message.author.id);
 
+
 	const userExists = await getUserLocal(userId, serverId, prisma);
 	if(!userExists) {
-		await createServer(serverId, prisma);
 		await createUser(userId, serverId, message.author.username, prisma);
 	}
 

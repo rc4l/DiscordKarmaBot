@@ -1,5 +1,5 @@
-import { generalizedUpsert } from '../queries/generalized-upsert';
+import { generalizedFindAndCreate } from './generalized-find-and-create';
 
 export const createWorld = async (prisma: any) => {
-	await generalizedUpsert({ modelName: 'world', uniqueId: 1, kvpArray: [], prisma });
+	await generalizedFindAndCreate({ modelName: 'world', uniqueId: 1, kvpArray: [], prisma });
 };
