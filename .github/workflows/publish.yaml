@@ -23,6 +23,6 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
-          docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot:${{github.event.inputs.version }}
+          docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot/discordkarmabot:${{github.event.inputs.version }}
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/discordkarmabot:${{ github.event.inputs.version }}
+        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:${{ github.event.inputs.version }}
