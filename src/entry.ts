@@ -1,4 +1,4 @@
-import { Client, Events, GatewayIntentBits, MessageReaction, PartialMessageReaction, PartialUser, User } from 'discord.js';
+import { Client, Events, GatewayIntentBits, MessageReaction, PartialMessageReaction, PartialUser, Partials, User } from 'discord.js';
 import { processMessage } from './handlers/message';
 import { processLoad } from './handlers/load';
 import { processCommand } from './handlers/command';
@@ -39,17 +39,25 @@ const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
 prismaClient.$use(cacheMiddleware);
 
 // See https://discord.com/developers/docs/topics/gateway#list-of-intents
-const client = new Client({
+export const discordClient = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildPresences,
+	],
+	partials: [
+		Partials.Message,
+		Partials.Channel,
+		Partials.Reaction,
+		Partials.User,
+		Partials.GuildMember,
 	],
 });
 
-client.once('ready', async () => {
-	processLoad(client, prismaClient).then(async () => {
+discordClient.once('ready', async () => {
+	processLoad(discordClient, prismaClient).then(async () => {
 		await prismaClient.$disconnect();
 	}).catch(async (e) => {
 		console.error(e);
@@ -60,20 +68,20 @@ client.once('ready', async () => {
 
 // List of Discord Events -> https://old.discordjs.dev/#/docs/discord.js/14.11.0/typedef/Events
 // Messages
-client.on(Events.MessageCreate, (message: any) => {
-	processMessage(client, message, prismaClient);
+discordClient.on(Events.MessageCreate, (message: any) => {
+	processMessage(discordClient, message, prismaClient);
 });
 
 // Slash commands
-client.on(Events.InteractionCreate, async interaction => {
+discordClient.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isCommand()) return;
-	await processCommand(client, interaction);
+	await processCommand(discordClient, interaction);
 });
 
 // Reactions
-client.on(Events.MessageReactionAdd, async (reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser) => {
-	await processReaction(client, reaction, user);
+discordClient.on(Events.MessageReactionAdd, async (reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser) => {
+	await processReaction(discordClient, reaction, user);
 });
 
 // If you cloned this repo, you will need to make your own secrets.js file with your own token.
-client.login(process.env.DISCORD_BOT_TOKEN);
+discordClient.login(process.env.DISCORD_BOT_TOKEN);

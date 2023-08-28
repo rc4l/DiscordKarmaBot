@@ -1,6 +1,7 @@
 import { CommandInteraction, ChatInputApplicationCommandData, Client } from 'discord.js';
 export const LIKE = '👍';
 export const DISLIKE = '👎';
+export const UNKNOWN = '❓';
 
 export interface upsertParams {
     modelName: string;

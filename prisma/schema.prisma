@@ -52,12 +52,14 @@ model ServerSettings {
   updatedAt DateTime @updatedAt
   server    Server  @relation(fields: [id], references: [id])
   settings Json? @default("{}")
+  lastKnownName String?     @default("?")
 }
 
 model ChannelSettings {
   id        BigInt   @id @unique // Channel ID
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  lastKnownName String?      @default("?")
   serverId  BigInt
   server    Server  @relation(fields: [serverId], references: [id])
   settings Json? @default("{}")
