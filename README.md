@@ -10,6 +10,7 @@ The goal of this project is to have a scoring system for non-text messages on Di
 - Nodemon - Hot reloading.
 - Postgres + Prisma - Relational database to store settings per server, users, etc. Prisma is an ORM (Object relational mapping) library to elegantly generate Postgres queries.
 - Redis - Caching through the ioRedis library.
+- Docker - Containerization so it's easy to deploy.
 
 ## Prerequisites
 
@@ -25,12 +26,12 @@ Add Reactions
 `
 This should all add up to `76864` within their bot permissions calculator inside the portal. 
 
-## Installation
+## Local Installation
 
 0. Complete the prerequisites, this bot will literally not work if you don't do all of it.
 1. Clone this repo.
 2. `npm i` to install dependencies.
-3. `npx prisma init` to setup prisma.
+3. (Optional) `npx prisma init` to setup prisma if you aren't using my schema.
 4. Throw in your postgres credentials within the newly generated `./.env` file. [Supplementary information here if confused](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgresql). Also run `npx prisma migrate dev --name init`; any changes made to the schema requires this to be ran every time.
 5. Inside the `.env` file, within a new line, add the token with the name DISCORD_BOT_TOKEN. For example: `DISCORD_BOT_TOKEN="YOUR TOKEN GOES HERE"`.
 5. Inside the `.env` file, within a new line, add the application id with the name DISCORD_APPLICATION_ID. For example: `DISCORD_APPLICATION_ID="YOUR APP ID GOES HERE"`.
@@ -45,6 +46,9 @@ These steps need to be followed whenever a new command is added, removed, or if 
 2. Import the file you just made and define it within the constants file. Make sure it gets appended to the array and the name is correct.
 3. Run `npm run updatecommands`.
 4. The list of commands should now be updates and you can run your bot again via `npm run start` to validate.
+
+## Hosting
+I personally host this on DigitalOcean. There's a github workflow that generates a docker image that gets uploaded to their container repository which my droplet uses. Any time it gets updated then my droplet uses the new upload.
 
 ## Directory
 

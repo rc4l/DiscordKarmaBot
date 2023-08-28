@@ -21,7 +21,8 @@ client.once('ready', async () => {
 	if (!client.user || !client.application) {
 		return;
 	}
-	console.log('Registering commands');
+	console.log('Login successful!');
+	console.log('Registering commands...');
 	try {
 		await client.application.commands.set(Commands);
 	}
