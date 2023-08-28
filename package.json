@@ -1,13 +1,13 @@
 {
 	"name": "discord-karma-bot-by-dmf",
 	"version": "0.0.8",
-	"description": "",
+	"description": "See README.md for more information",
 	"main": "src/entry.ts",
 	"scripts": {
 		"lint": "eslint --ext .js --ext .ts",
-		"release:patch": "npm version patch && git add . && git commit -m \"Patch release\" && git push && git push --tags && git push",
-		"release:minor": "npm version minor && git add . && git commit -m \"Minor release\" && git push && git push --tags",
-		"release:major": "npm version major && git add . && git commit -m \"Major release\" && git push && git push --tags",
+		"release:patch": "npm version patch && git add . && git commit -m \"Patch release\" && git push origin && git push origin --tags",
+		"release:minor": "npm version minor && git add . && git commit -m \"Minor release\" && git push origin && git push origin --tags",
+		"release:major": "npm version major && git add . && git commit -m \"Major release\" && git push origin && git push origin --tags",
 		"refreshdb": "npx prisma migrate dev --name init",
 		"start": "nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
 		"startdocker": "npm install && ts-node src/scripts/register-commands.ts && nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
