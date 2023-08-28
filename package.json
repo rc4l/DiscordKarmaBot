@@ -1,15 +1,15 @@
 {
 	"name": "discord-karma-bot-by-dmf",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "",
 	"main": "src/entry.ts",
 	"scripts": {
 		"lint": "eslint --ext .js --ext .ts",
-        "refreshdb": "npx prisma migrate dev --name init",
+		"refreshdb": "npx prisma migrate dev --name init",
 		"start": "nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
-        "startdocker": "npm install && ts-node src/scripts/register-commands.ts && nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
+		"startdocker": "npm install && ts-node src/scripts/register-commands.ts && nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"updatecommands": "ts-node src/scripts/register-commands.ts"        
+		"updatecommands": "ts-node src/scripts/register-commands.ts"
 	},
 	"keywords": [],
 	"author": "rc4l",
