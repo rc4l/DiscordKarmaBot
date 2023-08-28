@@ -1,9 +1,11 @@
 name: Build and publish manually
 
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Image version'
+        required: true
 
 jobs:
   build_and_push:
@@ -21,6 +23,6 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
-          docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.ref_name }}
+          docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot/discordkarmabot:${{github.event.inputs.version }}
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.ref_name }}
+        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:${{ github.event.inputs.version }}
