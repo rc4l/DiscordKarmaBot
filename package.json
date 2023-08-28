@@ -5,7 +5,7 @@
 	"main": "src/entry.ts",
 	"scripts": {
 		"lint": "eslint --ext .js --ext .ts",
-		"release:patch": "npm version patch && git add . && git commit -m \"Patch release\" && git push && git push --tags",
+		"release:patch": "npm version patch && git add . && git commit -m \"Patch release\" && git push && git push --tags && git push",
 		"release:minor": "npm version minor && git add . && git commit -m \"Minor release\" && git push && git push --tags",
 		"release:major": "npm version major && git add . && git commit -m \"Major release\" && git push && git push --tags",
 		"refreshdb": "npx prisma migrate dev --name init",
