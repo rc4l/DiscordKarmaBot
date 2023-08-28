@@ -5,9 +5,9 @@
 	"main": "src/entry.ts",
 	"scripts": {
 		"lint": "eslint --ext .js --ext .ts",
-		"release:patch": "npm version patch && git add . && git commit -m 'Patch release'",
-		"release:minor": "npm version minor && git add . && git commit -m 'Minor release'",
-		"release:major": "npm version major && git add . && git commit -m 'Major release'",
+		"release:patch": "npm version patch; git add .; git commit -m 'Patch release'",
+		"release:minor": "npm version minor; git add .; git commit -m 'Minor release'",
+		"release:major": "npm version major; git add .; git commit -m 'Major release'",
 		"refreshdb": "npx prisma migrate dev --name init",
 		"start": "nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
 		"startdocker": "npm install && ts-node src/scripts/register-commands.ts && nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
