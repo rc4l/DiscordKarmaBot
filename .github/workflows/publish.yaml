@@ -6,6 +6,9 @@ on:
       version:
         description: 'Image version'
         required: true
+  push:
+    tags:
+      - '*'
 
 jobs:
   build_and_push:
