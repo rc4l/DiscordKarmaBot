@@ -1,4 +1,4 @@
-name: Build and publish manually
+name: Build and publish automatically on tag pushes
 
 on:
   push:
