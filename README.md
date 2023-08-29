@@ -4,7 +4,10 @@ This bot originally started as a tool for my own discord for the various art, vi
 
 
 
-### For users
+# For users
+
+If you're trying to add this bot to your server this section is for you.
+
 ## How to start the bot
 
 Simply run `/setupserver` once to activate the bot you can either ignore the options or set them up. Once ran, all content posted in the entire server will automatically have likes/dislikes added to it. I recommend limiting the visibility of this bot to channels you actually care about. You will also need the manage server permission for it to work.
@@ -13,16 +16,19 @@ Simply run `/setupserver` once to activate the bot you can either ignore the opt
 
 Note: You will need to be an admin of the server (basically have manage server permissions) to run any of these commands.
 
-# setupserver
+### setupserver
 `/setupserver` This registers your server with the bot so that it can actually work. It comes with the following options:
 - `like-reaction`: You can override the default "like" emoji with another one here. The emoji must be from the same server; you can just directly use the emoji when you run the command.
 - `dislike-reaction`: You can override the default "dislike" emoji with another one here. The emoji must be from the same server; you can just directly use the emoji when you run the command.
 
-# setupchannel
+### setupchannel
 `/setupchannel` You don't have to run this at all unless you want some channel-specific goodies. Such as:
 - `forbid-text`: This makes it so any message inside the channel this command was ran on will be deleted if it didn't contain any content. So for example a post containing an image/video won't be deleted but someone just saying "lol" will get deleted automatically.
 
-### For developers
+# For developers
+
+If you're a developer that's curious on how everything is setup then this section is for you.
+
 ## Tech stack
 
 - Discord.js - Helper library to make working with Discord's API easier.
