@@ -8,10 +8,6 @@ This bot originally started as a tool for my own discord for the various art, vi
 
 [Click here to add the bot to your discord server](https://discord.com/api/oauth2/authorize?client_id=750646677219573770&permissions=292058115136&scope=bot)
 
-# For users
-
-If you're trying to add this bot to your server this section is for you.
-
 ## How to start the bot
 
 Simply run `/setupserver` once to activate the bot you can either ignore the options or set them up. Once ran, all content posted in the entire server will automatically have likes/dislikes added to it. I recommend limiting the visibility of this bot to channels you actually care about. You will also need the manage server permission for it to work.
