@@ -1,7 +1,28 @@
 # Karma Bot by DMF
 
-The goal of this project is to have a scoring system for non-text messages on Discord servers. So images, videos, embeds, etc will always have a customizeable like/dislike button as reaction images where users can click on them to give it a +1 or -1 rating. 
+This bot originally started as a tool for my own discord for the various art, video, meme, etc, channels where they're attachment heavy. The main point is to automatically add like/dislikes to all content posted in a channel as a way to easily guage how much people liked something. It comes with other features such as the ability to automatically delete any post that doesn't contain content if you prefer to run a channel reddit-style for example. 
 
+
+
+### For users
+## How to start the bot
+
+Simply run `/setupserver` once to activate the bot you can either ignore the options or set them up. Once ran, all content posted in the entire server will automatically have likes/dislikes added to it. I recommend limiting the visibility of this bot to channels you actually care about. You will also need the manage server permission for it to work.
+
+## Commands and options
+
+Note: You will need to be an admin of the server (basically have manage server permissions) to run any of these commands.
+
+# setupserver
+`/setupserver` This registers your server with the bot so that it can actually work. It comes with the following options:
+- `like-reaction`: You can override the default "like" emoji with another one here. The emoji must be from the same server; you can just directly use the emoji when you run the command.
+- `dislike-reaction`: You can override the default "dislike" emoji with another one here. The emoji must be from the same server; you can just directly use the emoji when you run the command.
+
+# setupchannel
+`/setupchannel` You don't have to run this at all unless you want some channel-specific goodies. Such as:
+- `forbid-text`: This makes it so any message inside the channel this command was ran on will be deleted if it didn't contain any content. So for example a post containing an image/video won't be deleted but someone just saying "lol" will get deleted automatically.
+
+### For developers
 ## Tech stack
 
 - Discord.js - Helper library to make working with Discord's API easier.

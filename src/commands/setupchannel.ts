@@ -11,7 +11,7 @@ const options: ApplicationCommandOptionData[] = [
 		type: ApplicationCommandOptionType.Boolean,
 		name: 'forbid-text',
 		description: 'Will automatically delete user messages that don\'t at least contain an image/video/embed.',
-	},
+	}, /*
 	{
 		type: ApplicationCommandOptionType.Boolean,
 		name: 'disable-hall-of-fame',
@@ -21,7 +21,7 @@ const options: ApplicationCommandOptionData[] = [
 		type: ApplicationCommandOptionType.Number,
 		name: 'hall-of-fame-min-likes',
 		description: 'Automatically sends content to hall of fame with this amount of likes. 0 to disable.',
-	},
+	},*/
 ];
 
 export const setupchannel: Command = {

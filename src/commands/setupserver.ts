@@ -18,7 +18,7 @@ export const setupserver: Command = {
 			type: ApplicationCommandOptionType.String,
 			name: 'dislike-reaction',
 			description: 'Change the dislike button to be whatever reaction you specify here.',
-		},
+		}, /*
 		{
 			type: ApplicationCommandOptionType.String,
 			name: 'hall-of-fame-reaction',
@@ -28,7 +28,7 @@ export const setupserver: Command = {
 			type: ApplicationCommandOptionType.Role,
 			name: 'hall-of-fame-curator',
 			description: 'The bot will only respect people with this role on hall of fame reactions. Leave empty to disable.',
-		},
+		},*/
 	],
 	description: 'Use this to modify server settings.',
 	run: async (client: Client, interaction: CommandInteraction) => {
