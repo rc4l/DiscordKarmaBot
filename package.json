@@ -11,7 +11,7 @@
 		"refreshdb": "npx prisma migrate dev --name init",
 		"start": "ts-node src/entry.ts",
 		"start:dev": "nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
-		"startdockerlocal": "npm install && ts-node src/scripts/register-commands.ts && nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
+		"startdocker": "npm install && ts-node src/scripts/register-commands.ts && nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"updatecommands": "ts-node src/scripts/register-commands.ts"
 	},
