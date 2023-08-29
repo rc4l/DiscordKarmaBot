@@ -32,7 +32,7 @@ export const checkAndSetupWorldAndServer = async (serverId: number) => {
 	}
 	if (!we) we = await createWorld(prismaClient);
 	if (!se) se = await createServer(serverId, prismaClient);
-	if (!ss) ss = await registerServerSettings({ ...defaultServerSettings }, serverId, prismaClient);
+	if (!ss) ss = await registerServerSettings({ ...defaultServerSettings }, { serverId, lastKnownName:'?' }, prismaClient);
 
 	return we && se && ss;
 };

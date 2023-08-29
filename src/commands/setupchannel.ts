@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandOptionData, ApplicationCommandOptionType } from 'discord.js';
+import { CommandInteraction, Client, ApplicationCommandOptionData, ApplicationCommandOptionType, TextChannel } from 'discord.js';
 import { Command } from '../constants';
 import { interactionIsInDMs, getSingleNestedObjectChanges } from '../utils';
 import { prismaClient } from '../entry';
@@ -39,6 +39,7 @@ export const setupchannel: Command = {
 		}
 
 		const currentSettings = (await getChannelSettings(Number(interaction.channelId), prismaClient))?.settings || {};
+		const channel = client.channels.cache.get(interaction.channelId);
 
 		const updatedSettings = { ...defaultChannelSettings, ...currentSettings };
 		const forbidTextOption = await interaction.options.get('forbid-text')?.value;
@@ -48,7 +49,7 @@ export const setupchannel: Command = {
 		const hallOfFameMinLikesOption = await interaction.options.get('hall-of-fame-min-likes')?.value;
 		if (hallOfFameMinLikesOption !== undefined) updatedSettings.hallOfFameMinimumLikes = hallOfFameMinLikesOption === undefined ? updatedSettings.hallOfFameMinimumLikes : hallOfFameMinLikesOption;
 
-		await registerChannelSettings(updatedSettings, Number(interaction.channelId), Number(interaction.guildId), prismaClient);
+		await registerChannelSettings({ ...updatedSettings }, { channelId:Number(interaction.channelId), serverId:Number(interaction.guildId), lastKnownName: (channel as TextChannel)?.name ?? '?' }, prismaClient);
 
 		await interaction.followUp({
 			ephemeral: true,

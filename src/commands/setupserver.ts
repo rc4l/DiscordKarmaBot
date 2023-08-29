@@ -56,7 +56,8 @@ export const setupserver: Command = {
 		const hallOfFameCuratorOption = await interaction.options.get('hall-of-fame-curator')?.value;
 		if (hallOfFameCuratorOption !== undefined) updatedSettings.hallOfFameCurator = hallOfFameCuratorOption === undefined ? updatedSettings.hallOfFameCurator : hallOfFameCuratorOption;
 
-		await registerServerSettings(updatedSettings, serverId, prismaClient);
+
+		await registerServerSettings(updatedSettings, { serverId, lastKnownName:client.guilds.cache.get(interaction.guildId ?? '')?.name ?? '?' }, prismaClient);
 
 		await interaction.followUp({
 			ephemeral: true,
