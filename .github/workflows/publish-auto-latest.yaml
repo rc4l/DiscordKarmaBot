@@ -1,4 +1,5 @@
 # https://wttech.blog/blog/2021/how-to-push-docker-image-to-digitalocean-container-registry-using-github-actions/
+# This workflow sends the docker image to the DigitalOcean Container Registry with the "latest" tag. Saves a lot of space doing it this way.
 name: Build and publish automatically on tag pushes
 on:
   push:
@@ -21,6 +22,6 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
-          docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.ref_name }}
+          docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot/discordkarmabot:latest
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.ref_name }}
+        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:latest
