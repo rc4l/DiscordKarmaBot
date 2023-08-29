@@ -23,4 +23,4 @@ jobs:
         run:
           docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.ref_name }}
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.ref_name }}
+        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:latest
