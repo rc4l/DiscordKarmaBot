@@ -1,5 +1,5 @@
 # Karma Bot by DMF
-![GitHub tag (with filter)](https://img.shields.io/github/v/tag/rc4l/DiscordKarmaBot?label=release&color=orange) ![Discord](https://img.shields.io/discord/1145933723892723762?logo=discord&label=help&link=https%3A%2F%2Fdiscord.gg%2FjyCCFGJa6F) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/rc4l/DiscordKarmaBot/publish-auto-versioning.yaml?event=push)
+![GitHub tag (with filter)](https://img.shields.io/github/v/tag/rc4l/DiscordKarmaBot?label=release&color=orange) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/rc4l/DiscordKarmaBot/publish-auto-versioning.yaml?event=push) ![Discord](https://img.shields.io/discord/1145933723892723762?logo=discord&label=help&link=https%3A%2F%2Fdiscord.gg%2FjyCCFGJa6F) 
 
 
 
