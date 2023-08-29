@@ -12,12 +12,15 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v3
       - name: Build image 
-        run: docker build --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} --build-arg DISCORD_APPLICATION_ID=${{ secrets.DISCORD_APPLICATION_ID }} -t discordkarmabot:latest -t discordkarmabot:${{  github.ref_name }} -t \registry.digitalocean.com/discordkarmabot/discordkarmabot:latest . 
+        run: docker build --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} --build-arg DISCORD_APPLICATION_ID=${{ secrets.DISCORD_APPLICATION_ID }} -t discordkarmabot:${{  github.ref_name }} . 
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Log in to DO Container Registry 
         run: doctl registry login --expiry-seconds 600
+      - name: Tag image 
+        run:
+          docker tag discordkarmabot:${{  github.ref_name }} \registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.ref_name }}
       - name: Push image to DO Container Registry 
         run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:latest
