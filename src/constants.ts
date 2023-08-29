@@ -2,6 +2,7 @@ import { CommandInteraction, ChatInputApplicationCommandData, Client } from 'dis
 export const LIKE = '👍';
 export const DISLIKE = '👎';
 export const UNKNOWN = '❓';
+export const REFRESH = '♻️';
 
 export interface upsertParams {
     modelName: string;

@@ -29,6 +29,9 @@ Note: You will need to be an admin of the server (basically have manage server p
 `/setupchannel` You don't have to run this at all unless you want some channel-specific goodies. Such as:
 - `forbid-text`: This makes it so any message inside the channel this command was ran on will be deleted if it didn't contain any content. So for example a post containing an image/video won't be deleted but someone just saying "lol" will get deleted automatically.
 
+### ♻️
+If there are any messages that don't have the like/dislike emojis, you can react to a message yourself with the ♻️ (recycle) emoji and the bot will attempt to add the like/dislike emoji back in and remove the ♻️.
+
 # For developers
 
 If you're a developer that's curious on how everything is setup then this section is for you.

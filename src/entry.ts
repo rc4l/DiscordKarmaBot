@@ -80,7 +80,7 @@ discordClient.on(Events.InteractionCreate, async interaction => {
 
 // Reactions
 discordClient.on(Events.MessageReactionAdd, async (reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser) => {
-	await processReaction(discordClient, reaction, user);
+	await processReaction(discordClient, reaction, user, prismaClient);
 });
 
 // If you cloned this repo, you will need to make your own secrets.js file with your own token.
