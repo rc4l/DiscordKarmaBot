@@ -1,10 +1,9 @@
 # https://wttech.blog/blog/2021/how-to-push-docker-image-to-digitalocean-container-registry-using-github-actions/
-# This workflow is archived for now. Pushing up docker images per version of this app eats up too much space.
 name: Build and publish automatically on tag pushes
-# on:
-#  push:
-#    tags:
-#      - '*'
+on:
+  push:
+    tags:
+      - '*'
 
 jobs:
   build_and_push:
