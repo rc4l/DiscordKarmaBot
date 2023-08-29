@@ -29,8 +29,29 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 	const results = await Promise.all(all);
 	const userExists = results[0];
 	const isTextForbidden = results[1]?.settings?.isTextForbidden ?? false;
+	const allowEmbedReactions = Number(results[2]?.settings?.allowEmbedReactions ?? 0);
 
-	if(isTextForbidden && !message.attachments.first()) {
+	// console.log(message?.embeds[0]?.data);
+	let shouldDelete = isTextForbidden && !message.attachments.first();
+	if(message?.embeds?.length) {
+		switch(allowEmbedReactions) {
+			case 1:
+				shouldDelete = false;
+				break;
+			case 2:
+				if(message?.embeds[0]?.data?.video) shouldDelete = false;
+				else shouldDelete = true;
+				break;
+			case 3:
+				if(message?.embeds[0]?.data?.thumbnail) shouldDelete = false;
+				else shouldDelete = true;
+				break;
+			default:
+				shouldDelete = true;
+				break;
+		}
+	}
+	if(shouldDelete) {
 		message.delete();
 		return;
 	}
@@ -38,6 +59,5 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 	if(!userExists && message?.author?.username) {
 		await createUser(userId, serverId, message?.author?.username, prisma);
 	}
-
-	if (message.attachments.first()) processInitialReactions(message, results[2]?.settings);
+	processInitialReactions(message, results[2]?.settings);
 };

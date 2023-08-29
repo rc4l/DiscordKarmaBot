@@ -20,6 +20,12 @@ Note: You will need to be an admin of the server (basically have manage server p
 `/setupserver` This registers your server with the bot so that it can actually work. It comes with the following options:
 - `like-reaction`: You can override the default "like" emoji with another one here. The emoji must be from the same server; you can just directly use the emoji when you run the command.
 - `dislike-reaction`: You can override the default "dislike" emoji with another one here. The emoji must be from the same server; you can just directly use the emoji when you run the command.
+- `allow-embed-reactions`: This has several options, any of the ones that turn it on will make the bot automatically add like/dislike reactions to messages that contain links which have embeds (like youtube, reddit, etc). It supports the following:
+    - `Ignore`: The bot won't add likes/dislikes to embeds
+    - `Allow all`: The bot will add likes/dislikes to everything that has an embed
+    - `Allow only for videos that can be played in discord (such as youtube videos)`: The bot will only add likes/dislikes to linked videos that can be played through discord (eg youtube). Any video link that requires you to open an app or browser to play won't have likes/dislikes added
+    - `Allow only if it has an image or video to show`: If the embedded link has any sort of image or preview, then the bot will automatically add likes/dislikes
+Note: Embeds that have likes/dislikes added due to this option will circumvent the `forbid-text` channel setting.
 
 ### setupchannel
 `/setupchannel` You don't have to run this at all unless you want some channel-specific goodies. Such as:

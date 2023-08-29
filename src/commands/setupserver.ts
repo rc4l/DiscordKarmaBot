@@ -18,6 +18,29 @@ export const setupserver: Command = {
 			type: ApplicationCommandOptionType.String,
 			name: 'dislike-reaction',
 			description: 'Change the dislike button to be whatever reaction you specify here.',
+		},
+		{
+			type: ApplicationCommandOptionType.Integer,
+			name: 'allow-embed-reactions',
+			description: 'Customize behavior of messages that contain embeds.',
+			choices: [
+				{
+					name: 'Ignore',
+					value: 0,
+				},
+				{
+					name: 'Allow all',
+					value: 1,
+				},
+				{
+					name: 'Allow only for videos that can be played in discord (such as youtube videos)',
+					value: 2,
+				},
+				{
+					name: 'Allow only if it has an image or video to show',
+					value: 3,
+				},
+			],
 		}, /*
 		{
 			type: ApplicationCommandOptionType.String,
@@ -55,7 +78,8 @@ export const setupserver: Command = {
 		if (hallOfFameReactionOption !== undefined) updatedSettings.hallOfFameReaction = hallOfFameReactionOption === undefined ? updatedSettings.hallOfFameReaction : hallOfFameReactionOption;
 		const hallOfFameCuratorOption = await interaction.options.get('hall-of-fame-curator')?.value;
 		if (hallOfFameCuratorOption !== undefined) updatedSettings.hallOfFameCurator = hallOfFameCuratorOption === undefined ? updatedSettings.hallOfFameCurator : hallOfFameCuratorOption;
-
+		const allowEmbedReactions = await interaction.options.get('allow-embed-reactions')?.value;
+		if (allowEmbedReactions !== undefined) updatedSettings.allowEmbedReactions = allowEmbedReactions === undefined ? updatedSettings.hallOfFameCurator : allowEmbedReactions;
 
 		await registerServerSettings(updatedSettings, { serverId, lastKnownName:client.guilds.cache.get(interaction.guildId ?? '')?.name ?? '?' }, prismaClient);
 
