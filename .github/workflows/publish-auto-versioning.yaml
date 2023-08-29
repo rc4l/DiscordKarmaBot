@@ -1,4 +1,5 @@
 # https://wttech.blog/blog/2021/how-to-push-docker-image-to-digitalocean-container-registry-using-github-actions/
+# Do not panic if this doesn't run immediately on a tag push. Github occasionally has delays in running actions.
 name: Build and publish automatically on tag pushes
 on:
   push:
