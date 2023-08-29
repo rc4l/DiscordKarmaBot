@@ -1,3 +1,4 @@
+# https://wttech.blog/blog/2021/how-to-push-docker-image-to-digitalocean-container-registry-using-github-actions/
 name: Build and publish automatically on tag pushes
 on:
   push:
@@ -11,7 +12,7 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v3
       - name: Build image 
-        run: docker build --no-cache --progress=plain --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} --build-arg DISCORD_APPLICATION_ID=${{ secrets.DISCORD_APPLICATION_ID }} -t discordkarmabot:${{  github.ref_name }} . 
+        run: docker build --no-cache --progress=plain --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} --build-arg DISCORD_APPLICATION_ID=${{ secrets.DISCORD_APPLICATION_ID }} -t . 
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
         with:
