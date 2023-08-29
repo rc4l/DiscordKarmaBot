@@ -5,7 +5,7 @@
 	"main": "src/entry.ts",
 	"scripts": {
 		"lint": "eslint --ext .js --ext .ts",
-		"release": "npm version patch; git push --tags; git push",
+		"release": "npm version patch && git push --tags && git push",
 		"refreshdb": "npx prisma migrate dev --name init",
 		"start": "nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
 		"startdocker": "npm install && ts-node src/scripts/register-commands.ts && nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
