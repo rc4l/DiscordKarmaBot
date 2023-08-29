@@ -19,10 +19,5 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Log in to DO Container Registry 
         run: doctl registry login --expiry-seconds 600
-      - name: Tag image 
-        run:
-          # This is stupidly confusing but tagging it as latest will make docker pull run without specifying the version. If we did
-          # specify the version, that would mean there'd be a manual step in by digitalocean to load the proper version. So we just tag it as latest and call it a day.
-          docker tag discordkarmabot:${{  github.ref_name }} \registry.digitalocean.com/discordkarmabot/discordkarmabot:latest
       - name: Push image to DO Container Registry 
         run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:latest
