@@ -14,7 +14,7 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v3
       - name: Build image 
-        run: docker build --no-cache --progress=plain --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} --build-arg DISCORD_APPLICATION_ID=${{ secrets.DISCORD_APPLICATION_ID }} -t discordkarmabot:${{github.event.inputs.version }} . 
+        run: docker build --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} --build-arg DISCORD_APPLICATION_ID=${{ secrets.DISCORD_APPLICATION_ID }} -t discordkarmabot . 
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
         with:
@@ -23,7 +23,6 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
-          docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot/discordkarmabot:${{github.event.inputs.version }}
+          docker tag discordkarmabot \registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.event.inputs.version }}
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:${{ github.event.inputs.version }}
-        name: Build and publish automatically on tag pushes
+        run: docker push registry.digitalocean.com/discordkarmabot/discordkarmabot:${{  github.event.inputs.version }}
