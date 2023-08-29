@@ -1,11 +1,9 @@
-name: Build and publish manually
+name: Build and publish automatically on tag pushes
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Image version'
-        required: true
-        
+  push:
+    tags:
+      - '*'
+
 jobs:
   build_and_push:
     runs-on: ubuntu-latest

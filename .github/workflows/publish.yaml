@@ -1,8 +1,11 @@
-name: Build and publish automatically on tag pushes
+name: Build and publish manually
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Image version'
+        required: true
+        
 
 jobs:
   build_and_push:
