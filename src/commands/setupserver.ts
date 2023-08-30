@@ -79,7 +79,7 @@ export const setupserver: Command = {
 		const hallOfFameCuratorOption = await interaction.options.get('hall-of-fame-curator')?.value;
 		if (hallOfFameCuratorOption !== undefined) updatedSettings.hallOfFameCurator = hallOfFameCuratorOption === undefined ? updatedSettings.hallOfFameCurator : hallOfFameCuratorOption;
 		const allowEmbedReactions = await interaction.options.get('allow-embed-reactions')?.value;
-		if (allowEmbedReactions !== undefined) updatedSettings.allowEmbedReactions = allowEmbedReactions === undefined ? updatedSettings.hallOfFameCurator : allowEmbedReactions;
+		if (allowEmbedReactions !== undefined) updatedSettings.allowEmbedReactions = allowEmbedReactions === undefined ? updatedSettings.allowEmbedReactions : allowEmbedReactions;
 
 		await registerServerSettings(updatedSettings, { serverId, lastKnownName:client.guilds.cache.get(interaction.guildId ?? '')?.name ?? '?' }, prismaClient);
 

@@ -8,9 +8,46 @@ import { registerChannelSettings } from '../queries/register-settings';
 
 const options: ApplicationCommandOptionData[] = [
 	{
-		type: ApplicationCommandOptionType.Boolean,
+		type: ApplicationCommandOptionType.Integer,
 		name: 'forbid-text',
-		description: 'Will automatically delete user messages that don\'t at least contain an image/video/embed.',
+		description: 'Customizeable message deletion for keeping channels clean.',
+		choices: [
+			{
+				name: 'Allow anything to be posted',
+				value: 0,
+			},
+			{
+				name: 'Messages must contain content',
+				value: 1,
+			},
+		],
+	},
+	{
+		type: ApplicationCommandOptionType.Integer,
+		name: 'allow-embed-reactions',
+		description: 'Customize behavior of messages that contain embeds.',
+		choices: [
+			{
+				name: 'Follow rules from /setupserver',
+				value: 0,
+			},
+			{
+				name: 'Disallow all',
+				value: 1,
+			},
+			{
+				name: 'Allow all',
+				value: 2,
+			},
+			{
+				name: 'Allow only for videos that can be played in discord (such as youtube videos)',
+				value: 3,
+			},
+			{
+				name: 'Allow only if it has an image or video to show',
+				value: 4,
+			},
+		],
 	}, /*
 	{
 		type: ApplicationCommandOptionType.Boolean,
@@ -48,6 +85,8 @@ export const setupchannel: Command = {
 		if (disableHallOfFameOption !== undefined) updatedSettings.dontSendToHallOfFame = disableHallOfFameOption === undefined ? updatedSettings.dontSendToHallOfFame : disableHallOfFameOption;
 		const hallOfFameMinLikesOption = await interaction.options.get('hall-of-fame-min-likes')?.value;
 		if (hallOfFameMinLikesOption !== undefined) updatedSettings.hallOfFameMinimumLikes = hallOfFameMinLikesOption === undefined ? updatedSettings.hallOfFameMinimumLikes : hallOfFameMinLikesOption;
+		const allowEmbedReactions = await interaction.options.get('allow-embed-reactions')?.value;
+		if (allowEmbedReactions !== undefined) updatedSettings.allowEmbedReactions = allowEmbedReactions === undefined ? updatedSettings.allowEmbedReactions : allowEmbedReactions;
 
 		await registerChannelSettings({ ...updatedSettings }, { channelId:Number(interaction.channelId), serverId:Number(interaction.guildId), lastKnownName: (channel as TextChannel)?.name ?? '?' }, prismaClient);
 

@@ -90,7 +90,7 @@ const determineEmoji = (preferredEmojiName: string, emojis: any) => {
 
 	// Leave if nothing is defined in the format we expect.
 	if (!preferredEmojiName || !String(preferredEmojiName) || !emojis) return null;
-	console.log(preferredEmojiName.match(numberExtractRegex));
+	// console.log(preferredEmojiName.match(numberExtractRegex));
 
 	// Unicode Emoji
 	if(emojiRegex.test(preferredEmojiName)) {
