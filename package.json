@@ -1,6 +1,6 @@
 {
 	"name": "discord-karma-bot-by-dmf",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "See README.md for more information",
 	"main": "src/entry.ts",
 	"scripts": {
