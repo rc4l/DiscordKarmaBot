@@ -3,6 +3,7 @@
 
 import { Client, GatewayIntentBits } from 'discord.js';
 import { Commands } from '../constants';
+import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,7 +17,6 @@ const client = new Client({
 	],
 });
 
-
 client.once('ready', async () => {
 	if (!client.user || !client.application) {
 		return;
@@ -25,6 +25,25 @@ client.once('ready', async () => {
 	console.log('Registering commands...');
 	try {
 		await client.application.commands.set(Commands);
+		const d = await JSON.stringify(Commands);
+		if (process.env.DISABLE_DISCORDBOTS_COMMAND_UPDATE) {
+			console.log(`Updating commands on discordbotlist.com to https://discordbotlist.com/api/v1/bots/:${process.env.DISCORD_APPLICATION_ID}/commands`);
+			axios.post(
+				`https://discordbotlist.com/api/v1/bots/:${process.env.DISCORD_APPLICATION_ID}/commands`,
+				d,
+				{
+					headers: {
+						'content-type':'application/json',
+						'Accept': 'Token',
+						'Access-Control-Allow-Origin': '*',
+					},
+				},
+			).then((response)=>{
+				console.log(response.data);
+			}).catch((error)=>{
+				console.error(error);
+			});
+		}
 	}
 	catch (e) {
 		console.error(e);

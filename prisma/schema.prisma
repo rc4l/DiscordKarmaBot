@@ -11,6 +11,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Message {
+  id        BigInt      @id @unique @default(autoincrement())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  worldUserId BigInt
+  serverId BigInt
+  channelId BigInt
+  content Json @default("{}")
+  likeCount Int @default(1)
+  dislikeCount Int @default(1)
+  interactions Int @default(2)
+  channelName String?
+  serverName String?
+  userName String?
+}
+
 model WorldUser {
   id      BigInt @id @unique // This uses your discord accounts ID
   worldId BigInt @default(1)

@@ -15,14 +15,14 @@ const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
 		// Time is in seconds
 		{ model: 'WorldUser', cacheTime: 60 },
 		{ model: 'LocalUser', cacheTime: 60 },
-		{ model: 'World', cacheTime: 120 },
-		{ model: 'Server', cacheTime: 120 },
+		{ model: 'World', cacheTime: 9999 },
+		{ model: 'Server', cacheTime: 9999 },
 		{ model: 'ServerSettings', cacheTime: 9999 },
 		{ model: 'ChannelSettings', cacheTime: 9999 },
 	],
 	storage: { type: 'memory', options: { size: 2048, invalidation: true } },
 	cacheTime: 300,
-	excludeModels: [],
+	excludeModels: ['Message'],
 	excludeMethods: [],
 	onHit: (key) => {
 		console.log('hit', key);
@@ -80,7 +80,12 @@ discordClient.on(Events.InteractionCreate, async interaction => {
 
 // Reactions
 discordClient.on(Events.MessageReactionAdd, async (reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser) => {
-	await processReaction(discordClient, reaction, user, prismaClient);
+	await processReaction(discordClient, reaction, true, user, prismaClient);
+});
+
+// Reactions
+discordClient.on(Events.MessageReactionRemove, async (reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser) => {
+	await processReaction(discordClient, reaction, false, user, prismaClient);
 });
 
 // If you cloned this repo, you will need to make your own secrets.js file with your own token.

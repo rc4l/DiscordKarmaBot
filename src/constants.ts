@@ -11,6 +11,14 @@ export interface upsertParams {
     prisma: any;
 }
 
+export interface upsertParamsSpecial {
+    modelName: string;
+    uniqueId: number;
+    kvpArrayCreate: kvp [];
+    kvpArrayUpdate: kvp [];
+    prisma: any;
+}
+
 export interface findByIdParams {
     modelName: string;
     kvpArray: kvp [];
