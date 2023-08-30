@@ -25,7 +25,6 @@ export const processReaction = async (client: Client, reaction: MessageReaction 
 	const dislikeReaction : string = serverSettings?.settings?.dislikeReaction;
 	const likeEmojiExtraction = likeReaction?.match(numberExtractRegex)?.at(0) ?? likeReaction;
 	const dislikeEmojiExtraction = dislikeReaction?.match(numberExtractRegex)?.at(0) ?? dislikeReaction;
-	if (!likeEmojiExtraction?.length || !dislikeEmojiExtraction?.length) return;
 
 	const params = await getMessageParams(Number(m.channel?.id), serverId, Number(m.author?.id), m);
 	let r;

@@ -12,12 +12,12 @@ export const setupserver: Command = {
 		{
 			type: ApplicationCommandOptionType.String,
 			name: 'like-reaction',
-			description: 'Change the like button to be whatever reaction you specify here.',
+			description: 'Change the like button to be whatever emoji you paste here.',
 		},
 		{
 			type: ApplicationCommandOptionType.String,
 			name: 'dislike-reaction',
-			description: 'Change the dislike button to be whatever reaction you specify here.',
+			description: 'Change the dislike button to be whatever emoji you paste here.',
 		},
 		{
 			type: ApplicationCommandOptionType.Integer,
@@ -64,28 +64,28 @@ export const setupserver: Command = {
 			});
 		}
 
-
 		const serverId = Number(interaction.guildId);
+		const hasSetup = (await getServerSettings(serverId, prismaClient))?.settings || null;
 		await checkAndSetupWorldAndServer(serverId);
 		const currentSettings = (await getServerSettings(serverId, prismaClient))?.settings || {};
 		const updatedSettings = { ...defaultServerSettings, ...currentSettings };
 
 		const likeReactionOption = await interaction.options.get('like-reaction')?.value;
-		if (likeReactionOption !== undefined) updatedSettings.likeReaction = likeReactionOption === undefined ? updatedSettings.likeReaction : likeReactionOption;
 		const dislikeReactionOption = await interaction.options.get('dislike-reaction')?.value;
-		if (dislikeReactionOption !== undefined) updatedSettings.dislikeReaction = dislikeReactionOption === undefined ? updatedSettings.dislikeReaction : dislikeReactionOption;
 		const hallOfFameReactionOption = await interaction.options.get('hall-of-fame-reaction')?.value;
-		if (hallOfFameReactionOption !== undefined) updatedSettings.hallOfFameReaction = hallOfFameReactionOption === undefined ? updatedSettings.hallOfFameReaction : hallOfFameReactionOption;
 		const hallOfFameCuratorOption = await interaction.options.get('hall-of-fame-curator')?.value;
-		if (hallOfFameCuratorOption !== undefined) updatedSettings.hallOfFameCurator = hallOfFameCuratorOption === undefined ? updatedSettings.hallOfFameCurator : hallOfFameCuratorOption;
 		const allowEmbedReactions = await interaction.options.get('allow-embed-reactions')?.value;
+		if (likeReactionOption !== undefined) updatedSettings.likeReaction = likeReactionOption === undefined ? updatedSettings.likeReaction : likeReactionOption;
+		if (dislikeReactionOption !== undefined) updatedSettings.dislikeReaction = dislikeReactionOption === undefined ? updatedSettings.dislikeReaction : dislikeReactionOption;
+		if (hallOfFameReactionOption !== undefined) updatedSettings.hallOfFameReaction = hallOfFameReactionOption === undefined ? updatedSettings.hallOfFameReaction : hallOfFameReactionOption;
+		if (hallOfFameCuratorOption !== undefined) updatedSettings.hallOfFameCurator = hallOfFameCuratorOption === undefined ? updatedSettings.hallOfFameCurator : hallOfFameCuratorOption;
 		if (allowEmbedReactions !== undefined) updatedSettings.allowEmbedReactions = allowEmbedReactions === undefined ? updatedSettings.allowEmbedReactions : allowEmbedReactions;
 
-		await registerServerSettings(updatedSettings, { serverId, lastKnownName:client.guilds.cache.get(interaction.guildId ?? '')?.name ?? '?' }, prismaClient);
 
+		await registerServerSettings(updatedSettings, { serverId, lastKnownName:client.guilds.cache.get(interaction.guildId ?? '')?.name ?? '?' }, prismaClient);
 		await interaction.followUp({
 			ephemeral: true,
-			content: getSingleNestedObjectChanges(currentSettings, updatedSettings),
+			content: !hasSetup ? 'Server registration complete ✅' : getSingleNestedObjectChanges(currentSettings, updatedSettings),
 		});
 	},
 };
