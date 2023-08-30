@@ -1,7 +1,7 @@
 import { CommandInteraction, Client } from 'discord.js';
-import { Command } from '../constants';
+import { Command, HELP_MESSAGE, NOT_REGISTERED_MESSAGE } from '../constants';
 import { interactionIsInDMs, isValidEnvironment } from '../utils';
-const FOLLOW_UP_TEXT = 'Please visit https://github.com/rc4l/DiscordKarmaBot for more information.';
+const FOLLOW_UP_TEXT = 'Visit https://github.com/rc4l/DiscordKarmaBot for more information.';
 
 
 export const help: Command = {
@@ -18,9 +18,11 @@ export const help: Command = {
 		let content = '';
 		const ve = await isValidEnvironment(Number(interaction.guildId));
 		if(ve?.pointOfFailure) {
-			content = 'Please run /setupserver first.';
+			content = NOT_REGISTERED_MESSAGE;
 		}
-		content += FOLLOW_UP_TEXT;
+		else {
+			content = HELP_MESSAGE;
+		}
 		await interaction.followUp({
 			ephemeral: true,
 			content,

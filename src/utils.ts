@@ -7,7 +7,7 @@ import { prismaClient } from './entry';
 import { getServerSettings } from './queries/get-server-settings';
 import { registerServerSettings } from './queries/register-settings';
 import { ServerSettings, defaultServerSettings } from './settings/configure';
-import { DISLIKE, LIKE } from './constants';
+import { DISLIKE, LIKE, NOT_REGISTERED_MESSAGE } from './constants';
 
 export const stringifyJSONWithBigIntSupport = (obj: any) => {
 	return JSON.stringify(obj, (key, value) =>
@@ -46,8 +46,8 @@ export const isValidEnvironment = async (serverId: number) => {
 	];
 	const results = await Promise.all(all);
 	if (!results[0]) {return { pointOfFailure: 'World environment not setup. This is a global issue.' };}
-	else if (!results[1]) {return { pointOfFailure: `Server environment for ${serverId} not setup. This is an issue with your server (did you run setupserver first?)` };}
-	else if (!results[2]) {return { pointOfFailure: `Server settings for ${serverId} not setup. This is an issue with your server (did you run setupserver first?)` };}
+	else if (!results[1]) {return { pointOfFailure: NOT_REGISTERED_MESSAGE };}
+	else if (!results[2]) {return { pointOfFailure: NOT_REGISTERED_MESSAGE };}
 
 	return {};
 };
