@@ -26,10 +26,14 @@ client.once('ready', async () => {
 	try {
 		await client.application.commands.set(Commands);
 		const d = await JSON.stringify(Commands);
-		if (process.env.DISABLE_DISCORDBOTS_COMMAND_UPDATE) {
-			console.log(`Updating commands on discordbotlist.com to https://discordbotlist.com/api/v1/bots/:${process.env.DISCORD_APPLICATION_ID}/commands`);
+		if (process.env.ENABLE_DISCORDBOTS_COMMAND_UPDATE) {
+			const url = process.env.DISCORDBOTS_APPLICATION_ID_OVERRIDE ?? process.env.DISCORD_APPLICATION_ID;
+			if (!url) {
+				throw new Error('No application ID found in environment variables. Please set DISCORD_APPLICATION_ID or DISCORDBOTS_APPLICATION_ID_OVERRIDE.');
+			}
+			console.log(`Updating commands on discordbotlist.com to https://discordbotlist.com/api/v1/bots/:${url}/commands`);
 			axios.post(
-				`https://discordbotlist.com/api/v1/bots/:${process.env.DISCORD_APPLICATION_ID}/commands`,
+				`https://discordbotlist.com/api/v1/bots/:${url}/commands`,
 				d,
 				{
 					headers: {
