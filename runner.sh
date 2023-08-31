@@ -14,5 +14,5 @@ docker rmi $(docker images -a -q)
 echo "...done";
 
 echo "Setting up the bot with version $1...";
-docker run -d -e DATABASE_URL='UPDATETHIS' -e DISCORD_BOT_TOKEN='UPDATETHISTOO' -e DISCORD_APPLICATION_ID='ANDTHIS' --restart unless-stopped registry.digitalocean.com/discordkarmabot/discordkarmabot:$1
+docker run -d -e DATABASE_URL='UPDATETHIS' -e DISCORD_BOT_TOKEN='UPDATETHISTOO' -e DISCORD_APPLICATION_ID='ANDTHIS' --restart=on-failure registry.digitalocean.com/discordkarmabot/discordkarmabot:$1
 echo "...done";
