@@ -67,7 +67,12 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 	}
 
 	if(isTextForbidden && !isReactableEmbed && !message.attachments.first()) {
-		message.delete();
+		try {
+			message?.delete();
+		}
+		catch (error) {
+			console.log(error);
+		}
 		return;
 	}
 

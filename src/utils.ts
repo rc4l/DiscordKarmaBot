@@ -79,6 +79,7 @@ export const processInitialReactions = async (message: Message | PartialMessage,
 
 	const preferredLike = determineEmoji(likeReaction, message?.guild?.emojis) ?? LIKE;
 	const preferredDislike = determineEmoji(dislikeReaction, message?.guild?.emojis) ?? DISLIKE;
+	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	try {
 		await message.react(preferredLike);
 		await message.react(preferredDislike);
