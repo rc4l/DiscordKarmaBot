@@ -9,9 +9,9 @@
 		"release:minor": "npm version minor && git push --tags && git push",
 		"release:major": "npm version major && git push --tags && git push",
 		"refreshdb": "npx prisma migrate dev --name init",
-		"start": "tsc && cross-env NODE_ENV=production & node build/entry.js",
+		"start": "tsc && cross-env NODE_ENV=production && node build/entry.js",
 		"start:dev": "nodemon --exec ./node_modules/.bin/babel-node src/entry.ts --extensions \".ts\"",
-		"startdocker": "npm install && tsc && cross-env NODE_ENV=production & node build/entry.js",
+		"startdocker": "npm install && tsc && cross-env NODE_ENV=production node build/entry.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"updatecommands": "ts-node src/scripts/register-commands.ts"
 	},
