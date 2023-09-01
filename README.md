@@ -13,7 +13,7 @@ This bot originally started as a tool for my own discord for the various art, vi
 
 ## How to start the bot
 
-Simply run `/setupserver` once to activate the bot you can either ignore the options or set them up. Once ran, all content posted in the entire server will automatically have likes/dislikes added to it. I recommend limiting the visibility of this bot to channels you actually care about. You will also need the manage server permission for it to work.
+Simply run `/setupserver` to register the bot with your server and run with some default settings. `/help` will show some example commands I run on my server to get you started.
 
 ## Commands and options
 
