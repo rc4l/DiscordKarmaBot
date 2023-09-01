@@ -38,7 +38,7 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 	let isReactableEmbed = false;
 
 	// Messages that have embeds won't have embed array populated on a create event. A 3 second grace period followed by a fetch will populate the embed array.
-	if(message.content && urlRegex.test(message.content) && !message?.embeds?.length && isTextForbidden && (allowEmbedReactionsChannel || allowEmbedReactionsServer)) {
+	if(message.content && !message?.embeds?.length && (allowEmbedReactionsChannel || allowEmbedReactionsServer) && urlRegex.test(message.content)) {
 		await new Promise(r => setTimeout(r, 2000));
 		message = await message.fetch();
 	}
