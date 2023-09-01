@@ -11,8 +11,6 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 	let message = m;
 	if(message?.author?.bot) return;
 	if(!message?.guild?.id) message = await message.fetch();
-	if(!message.content) return;
-
 
 	const v = await isValidEnvironment(Number(message?.guild?.id));
 	if (v?.pointOfFailure) {
