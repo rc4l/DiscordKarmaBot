@@ -6,10 +6,12 @@ import { getUserLocal } from '../queries/get-user-local';
 import { isValidEnvironment, processInitialReactions } from '../utils';
 import { RegisterMessageParams, registerMessage } from '../queries/register-message';
 
+const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])/igm;
 export const processMessage = async (client: any, m: Message | PartialMessage, prisma: any) => {
 	let message = m;
 	if(message?.author?.bot) return;
 	if(!message?.guild?.id) message = await message.fetch();
+	if(!message.content) return;
 
 
 	const v = await isValidEnvironment(Number(message?.guild?.id));
@@ -34,6 +36,12 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 	const allowEmbedReactionsServer = Number(results[2]?.settings?.allowEmbedReactions ?? 0) ?? 0;
 
 	let isReactableEmbed = false;
+
+	// Messages that have embeds won't have embed array populated on a create event. A 3 second grace period followed by a fetch will populate the embed array.
+	if(message.content && urlRegex.test(message.content) && !message?.embeds?.length && isTextForbidden && (allowEmbedReactionsChannel || allowEmbedReactionsServer)) {
+		await new Promise(r => setTimeout(r, 2000));
+		message = await message.fetch();
+	}
 	if (message?.embeds?.length) {
 		switch(allowEmbedReactionsChannel) {
 			case 1:
@@ -46,7 +54,7 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 				if(message?.embeds[0]?.data?.video) isReactableEmbed = true;
 				break;
 			case 4:
-				if(message?.embeds[0]?.data?.thumbnail) isReactableEmbed = false;
+				if(message?.embeds[0]?.data?.thumbnail || message?.embeds[0]?.data?.video) isReactableEmbed = true;
 				break;
 			default:
 				switch(allowEmbedReactionsServer) {
@@ -57,7 +65,7 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 						if(message?.embeds[0]?.data?.video) isReactableEmbed = true;
 						break;
 					case 3:
-						if(message?.embeds[0]?.data?.thumbnail) isReactableEmbed = false;
+						if(message?.embeds[0]?.data?.thumbnail || message?.embeds[0]?.data?.video) isReactableEmbed = true;
 						break;
 					default:
 						break;
