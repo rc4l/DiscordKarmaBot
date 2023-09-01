@@ -17,23 +17,23 @@ Simply run `/setupserver` once to activate the bot you can either ignore the opt
 
 ## Commands and options
 
-Note: You will need to be an admin of the server (basically have manage server permissions) to run any of these commands.
+Note: You'll need to be an admin of the server (basically have manage server permissions) to run any of these commands.
 
 ### Global commands
 `/setupserver` This registers your server with the bot so that it can actually work. It comes with the following options:
-- `like-reaction`: You can override the default "like" emoji with another one here. The emoji must be from the same server; you can just directly use the emoji when you run the command.
-- `dislike-reaction`: You can override the default "dislike" emoji with another one here. The emoji must be from the same server; you can just directly use the emoji when you run the command.
+- `like-reaction`: You can override the default "like" emoji with another one here. Custom reactions must be from the same server.
+- `dislike-reaction`: You can override the default "dislike" emoji with another one here. Custom reactions must be from the same server.
 - `allow-embed-reactions`: This has several options, any of the `allow` options will make the bot automatically add like/dislike reactions to messages that contain links which have embeds.
     - `Ignore`: The bot won't add likes/dislikes to embeds
     - `Allow all`: The bot will add likes/dislikes to everything that has an embed
-    - `Allow only for videos that can be played in discord (such as youtube videos)`: The bot will only add likes/dislikes to linked videos that can be played through discord (eg youtube). Any video link that requires you to open an app or browser to play won't have likes/dislikes added
+    - `Allow only for videos that can be played in discord (such as youtube videos)`: The bot will only add likes/dislikes to linked videos that can be played through discord (eg youtube, direct video links, etc).
     - `Allow only if it has an image or video to show`: If the embedded link has any sort of image or preview, then the bot will automatically add likes/dislikes
 
 ### Channel commands
 `/setupchannel` You don't have to run this at all unless you want some channel-specific goodies. Such as:
-- `forbid-text`: This makes it so any message inside the channel this command was ran on will be deleted if it didn't contain any content. So for example a post containing an image/video won't be deleted but someone just saying "lol" will get deleted automatically.
-    - `Allow anything to be posted`: Nothing will be automatically deleted
-    - `Messages must contain content`: Messages that aren't normally reactable will be deleted automatically. So attachments such as videos, images, etc are allowed along with embeds depending on what was configured within `allow-embed-reactions` won't be deleted. However plain messages such as just replying with "lol" will be automatically deleted.
+- `forbid-text`: This makes it so any message inside the channel that don't contain media will be automatically deleted.
+    - `Allow anything to be posted`: Text-only messages are allowed.
+    - `Messages must contain content`: All messages must contain reactable media or it gets deleted automatically.
 - `allow-embed-reactions`: This is the exact same thing from Global commands, `/setupserver allow-embed-reactions`, that you can override in a specific channel. For example, if you globally have embed reactions off but want them on specifically in a channel then this is for you.
     - `Follow rules from /setupserver`: Will follow rules defined in `/setupserver` instead
     - `Ignore`: The bot won't add likes/dislikes to embeds
