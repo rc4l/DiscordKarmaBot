@@ -5,7 +5,7 @@
 
 ![Examples](https://i.imgur.com/adNBjV0.png)
 
-This bot originally started as a tool for my own discord for the various art, video, meme, etc, channels where they're attachment heavy. The main point is to automatically add like/dislikes to all content posted in a channel as a way to easily guage how much people liked something. It comes with other features such as the ability to automatically delete any post that doesn't contain content if you prefer to run a channel reddit-style for example. 
+This bot originally started as a tool for my own discord for the various art, video, meme, etc, channels where they're attachment heavy. The main point is to automatically add like/dislikes to all types of media posted on a discord server so nobody has to manually do it.
 
 [Click here to add the bot to your discord server](https://discord.com/api/oauth2/authorize?client_id=750646677219573770&permissions=292058115136&scope=bot)
 
