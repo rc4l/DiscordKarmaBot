@@ -1,5 +1,5 @@
 # Karma Bot by DMF
-![GitHub tag (with filter)](https://img.shields.io/github/v/tag/rc4l/DiscordKarmaBot?label=release&color=orange) [![Deployments](https://github.com/rc4l/DiscordKarmaBot/actions/workflows/publish-auto-versioning.yaml/badge.svg?branch=)](https://github.com/rc4l/DiscordKarmaBot/actions/workflows/publish-auto-versioning.yaml)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/rc4l/discordkarmabot/main?logo=github&label=latest%20update&color=blue) ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/rc4l/DiscordKarmaBot?label=release&color=orange) [![Deployments](https://github.com/rc4l/DiscordKarmaBot/actions/workflows/publish-auto-versioning.yaml/badge.svg?branch=)](https://github.com/rc4l/DiscordKarmaBot/actions/workflows/publish-auto-versioning.yaml)
 
 ![Logo](https://i.imgur.com/zhJpAC5.png)
 
@@ -42,7 +42,7 @@ Note: You'll need to be an admin of the server (basically have manage server per
     - `Allow only if it has an image or video to show`: If the embedded link has any sort of image or preview, then the bot will automatically add likes/dislikes
 
 ### Special reactions
-# ♻️
+♻️
 If there are any messages that don't have the like/dislike emojis, you can react to a message yourself with the ♻️ (recycle) emoji and the bot will attempt to add the like/dislike emoji back in and remove the ♻️.
 
 # For developers
