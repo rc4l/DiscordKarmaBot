@@ -41,7 +41,8 @@ Note: You'll need to be an admin of the server (basically have manage server per
     - `Allow only for videos that can be played in discord (such as youtube videos)`: The bot will only add likes/dislikes to linked videos that can be played through discord (eg youtube). Any video link that requires you to open an app or browser to play won't have likes/dislikes added
     - `Allow only if it has an image or video to show`: If the embedded link has any sort of image or preview, then the bot will automatically add likes/dislikes
 
-### ♻️
+### Special reactions
+# ♻️
 If there are any messages that don't have the like/dislike emojis, you can react to a message yourself with the ♻️ (recycle) emoji and the bot will attempt to add the like/dislike emoji back in and remove the ♻️.
 
 # For developers
