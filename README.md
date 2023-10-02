@@ -89,10 +89,9 @@ This should all add up to `76864` within their bot permissions calculator inside
 ## Adding or removing /commands (slash commands)
 These steps need to be followed whenever a new command is added, removed, or if you modified anything aside from the `run` function within your command. The reason it's designed this way is because [there's a daily limit on command registration requests](https://discordjs.guide/creating-your-bot/command-deployment.html#command-registration) so simply running it every time on startup when we don't need to would eventually halt development for a day. Therefore this is a separate process entirely.
 
-1. Define it within the commands folder within its own file. You can use the other files in that folder as examples.
-2. Import the file you just made and define it within the constants file. Make sure it gets appended to the array and the name is correct.
-3. Run `npm run updatecommands`.
-4. The list of commands should now be updates and you can run your bot again via `npm run start` to validate.
+0. (Required if you're making a new command) Define your command within the `./src/commands` folder by creating a new file. You can use the other files in that folder as examples. Once done, you'll need to add the newly made command within the `Commands` array inside `./src/constants` by importing it. You can use the other commands within the constants file as examples and make sure to save when you think you are done.
+1. Run `npm run updatecommands`.
+2. The list of commands should now be updated and you can run your bot again via `npm run start` to validate. The changes you made should be testable now.
 
 ## Docker
 If you want to build a docker image just run `docker build -t discordkarmabotbydmf .`. Don't forget to add the environment variables described in the local installation section too.
