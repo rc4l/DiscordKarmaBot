@@ -97,7 +97,7 @@ These steps need to be followed whenever a new command is added, removed, or if 
 If you want to build a docker image just run `docker build -t discordkarmabotbydmf .`. Don't forget to add the environment variables described in the local installation section too.
 
 ## Hosting
-If you run the local installation then that's all you'll need to run this bot locally. For hosting elsewhere I recommend using the `dockerfile` within the root directory and creating an image; I personally host it this way on DigitalOcean for example. There's a github workflow that generates a docker image that gets uploaded to their container repository which my droplet uses. Any time it gets updated then my droplet uses the new upload. The file that handles all of this is located within `.github/workflows/publish-auto.yaml`. Remember to be very careful about exposing tokens, secrets, etc when pursuing this route.
+If you want something more than just running and hosting this locally then I recommend using the `dockerfile` within the root directory and creating an image; I personally host it this way on DigitalOcean for example. There's a github workflow that generates a docker image that gets uploaded to their container repository which my droplet uses. Any time it gets updated then my droplet uses the new upload. The file that handles all of this is located within `.github/workflows/publish-auto.yaml`. Remember to be very careful about exposing tokens, secrets, etc when pursuing this route.
 
 ## Directory
 
