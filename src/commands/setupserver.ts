@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandOptionType } from 'discord.js';
+import { CommandInteraction, Client, ApplicationCommandOptionType, ChannelType } from 'discord.js';
 import { Command } from '../constants';
 import { checkAndSetupWorldAndServer, getSingleNestedObjectChanges, interactionIsInDMs } from '../utils';
 import { defaultServerSettings } from '../settings/configure';
@@ -18,6 +18,17 @@ export const setupserver: Command = {
 			type: ApplicationCommandOptionType.String,
 			name: 'dislike-reaction',
 			description: 'Change the dislike button to be whatever emoji you paste here.',
+		},
+		{
+			type: ApplicationCommandOptionType.Integer,
+			name: 'popular-posts-minimum',
+			description: 'Minimum likes required to automatically send it to set-popular-posts-channel. Set to 0 to disable.',
+		},
+		{
+			type: ApplicationCommandOptionType.Channel,
+			channelTypes: [ChannelType.GuildText],
+			name: 'set-popular-posts-channel',
+			description: 'If popular-posts-minimum is greater than zero, then posts containing that amount of likes will be sent here.',
 		},
 		{
 			type: ApplicationCommandOptionType.Integer,
@@ -72,14 +83,19 @@ export const setupserver: Command = {
 
 		const likeReactionOption = await interaction.options.get('like-reaction')?.value;
 		const dislikeReactionOption = await interaction.options.get('dislike-reaction')?.value;
-		const hallOfFameReactionOption = await interaction.options.get('hall-of-fame-reaction')?.value;
-		const hallOfFameCuratorOption = await interaction.options.get('hall-of-fame-curator')?.value;
 		const allowEmbedReactions = await interaction.options.get('allow-embed-reactions')?.value;
 		if (likeReactionOption !== undefined) updatedSettings.likeReaction = likeReactionOption === undefined ? updatedSettings.likeReaction : likeReactionOption;
 		if (dislikeReactionOption !== undefined) updatedSettings.dislikeReaction = dislikeReactionOption === undefined ? updatedSettings.dislikeReaction : dislikeReactionOption;
-		if (hallOfFameReactionOption !== undefined) updatedSettings.hallOfFameReaction = hallOfFameReactionOption === undefined ? updatedSettings.hallOfFameReaction : hallOfFameReactionOption;
-		if (hallOfFameCuratorOption !== undefined) updatedSettings.hallOfFameCurator = hallOfFameCuratorOption === undefined ? updatedSettings.hallOfFameCurator : hallOfFameCuratorOption;
 		if (allowEmbedReactions !== undefined) updatedSettings.allowEmbedReactions = allowEmbedReactions === undefined ? updatedSettings.allowEmbedReactions : allowEmbedReactions;
+
+		const test = extractInteractionValues(updatedSettings, interaction, [
+			{ settingsName: 'likeReaction', interactionName: 'like-reaction', default: updatedSettings.likeReaction },
+			{ settingsName: 'dislikeReaction', interactionName: 'dislike-reaction', default: updatedSettings.dislikeReaction },
+			{ settingsName: 'allowEmbedReactions', interactionName: 'allow-embed-reactions', default: updatedSettings.allowEmbedReactions },
+			{ settingsName: 'popularPostsMinimum', interactionName: 'popular-posts-minimum', default: 0, negativeConstraint: (value) => value < 0 },
+			{ settingsName: 'setPopularPostsChannel', interactionName: 'set-popular-posts-channel', default: '' },
+		]);
+		// console.log(test);
 
 
 		await registerServerSettings(updatedSettings, { serverId, lastKnownName:client.guilds.cache.get(interaction.guildId ?? '')?.name ?? '?' }, prismaClient);
@@ -89,3 +105,28 @@ export const setupserver: Command = {
 		});
 	},
 };
+
+const extractInteractionValues = (settings: any, interaction: CommandInteraction, validArguments: InteractionValueWithConstraints[]) => {
+	for (const argument of validArguments) {
+		const value = interaction.options.get(argument.interactionName)?.value;
+		if (value !== undefined) {
+			if (argument.negativeConstraint && argument.negativeConstraint(value)) {
+				settings[argument.settingsName] = argument.default;
+			}
+			else {
+				settings[argument.settingsName] = value;
+			}
+		}
+		else {
+
+		}
+	}
+	return settings;
+};
+
+interface InteractionValueWithConstraints {
+    settingsName: string;
+    interactionName: string;
+    default: any;
+    negativeConstraint?: (value:any) => boolean;
+}

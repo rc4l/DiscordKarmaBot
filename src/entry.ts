@@ -46,6 +46,7 @@ export const discordClient = new Client({
 		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.GuildPresences,
+		GatewayIntentBits.GuildEmojisAndStickers,
 	],
 	partials: [
 		Partials.Message,
