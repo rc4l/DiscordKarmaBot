@@ -5,7 +5,7 @@
 
 ![Examples](https://i.imgur.com/adNBjV0.png)
 
-This bot originally started as a tool for my own discord for the various art, video, meme, etc, channels where they're attachment heavy. The main point is to automatically add like/dislikes to all content posted in a channel as a way to easily guage how much people liked something. It comes with other features such as the ability to automatically delete any post that doesn't contain content if you prefer to run a channel reddit-style for example. 
+This bot originally started as a tool for my own discord for the various art, video, meme, etc, channels where they're attachment heavy. The main point is to automatically add like/dislikes to all types of media posted on a discord server so nobody has to manually do it.
 
 [Click here to add the bot to your discord server](https://discord.com/api/oauth2/authorize?client_id=750646677219573770&permissions=292058115136&scope=bot)
 
@@ -89,16 +89,15 @@ This should all add up to `76864` within their bot permissions calculator inside
 ## Adding or removing /commands (slash commands)
 These steps need to be followed whenever a new command is added, removed, or if you modified anything aside from the `run` function within your command. The reason it's designed this way is because [there's a daily limit on command registration requests](https://discordjs.guide/creating-your-bot/command-deployment.html#command-registration) so simply running it every time on startup when we don't need to would eventually halt development for a day. Therefore this is a separate process entirely.
 
-1. Define it within the commands folder within its own file. You can use the other files in that folder as examples.
-2. Import the file you just made and define it within the constants file. Make sure it gets appended to the array and the name is correct.
-3. Run `npm run updatecommands`.
-4. The list of commands should now be updates and you can run your bot again via `npm run start` to validate.
+0. (Required if you're making a new command) Define your command within the `./src/commands` folder by creating a new file. You can use the other files in that folder as examples. Once done, you'll need to add the newly made command within the `Commands` array inside `./src/constants` by importing it. You can use the other commands within the constants file as examples and make sure to save when you think you are done.
+1. Run `npm run updatecommands`.
+2. The list of commands should now be updated and you can run your bot again via `npm run start` to validate. The changes you made should be testable now.
 
 ## Docker
 If you want to build a docker image just run `docker build -t discordkarmabotbydmf .`. Don't forget to add the environment variables described in the local installation section too.
 
 ## Hosting
-If you run the local installation then that's all you'll need to run this bot locally. For hosting elsewhere I recommend using the `dockerfile` within the root directory and creating an image; I personally host it this way on DigitalOcean for example. There's a github workflow that generates a docker image that gets uploaded to their container repository which my droplet uses. Any time it gets updated then my droplet uses the new upload. The file that handles all of this is located within `.github/workflows/publish-auto.yaml`. Remember to be very careful about exposing tokens, secrets, etc when pursuing this route.
+If you want something more than just running and hosting this locally then I recommend using the `dockerfile` within the root directory and creating an image; I personally host it this way on DigitalOcean for example. There's a github workflow that generates a docker image that gets uploaded to their container repository which my droplet uses. Any time it gets updated then my droplet uses the new upload. The file that handles all of this is located within `.github/workflows/publish-auto.yaml`. Remember to be very careful about exposing tokens, secrets, etc when pursuing this route.
 
 ## Directory
 
