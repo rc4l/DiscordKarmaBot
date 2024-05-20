@@ -12,12 +12,6 @@ export const processMessage = async (client: any, m: Message | PartialMessage, p
 	if(message?.author?.bot) return;
 	if(!message?.guild?.id) message = await message.fetch();
 
-	const v = await isValidEnvironment(Number(message?.guild?.id));
-	if (v?.pointOfFailure) {
-		client.channels.cache.get(message.channel.id).send(v.pointOfFailure + '\nIf you believe this to be an error, please report this as a bug at <https://github.com/rc4l/DiscordKarmaBot>');
-		return;
-	}
-
 	const channelId = Number(message.channel.id);
 	const serverId = Number(message?.guild?.id);
 	const userId = Number(message?.author?.id);
