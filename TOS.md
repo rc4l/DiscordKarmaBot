@@ -13,4 +13,4 @@ General conditions regarding Like/Dislike by DMF bot are under this topic.
 4. I have the rights to update terms of service anytime with a notice in the support server.
 
 # Privacy Policy
-Any data that Discord and your server exposes to the bot is analyzed and archived. None of this data is shared or sold in any way.
+Any data that Discord and your server exposes to the bot is analyzed and archived. None of this data is sold to other parties in any way.
