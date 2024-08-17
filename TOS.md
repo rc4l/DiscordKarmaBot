@@ -1,5 +1,5 @@
 # Terms of Service
-The following is the terms of service for my bot if you're using the official one I host on your discord servers called "Easy Like/Dislike by DMF bot". If you are hosting it yourself, feel free to ignore. For the rest of the terms, I refers to myself, DMF, and bot refers to the "Easy Like/Dislike by DMF" bot.
+The following is the terms of service for my bot if you're using the official one I host on your discord servers called "Easy Like/Dislike by DMF bot". If you are hosting it yourself, feel free to ignore. For the rest of the terms, I refers to myself, DMF, and bot refers to instances of the "Easy Like/Dislike by DMF" bot that I host and pay for.
 
 ## Conditions
 General conditions regarding Like/Dislike by DMF bot are under this topic.
