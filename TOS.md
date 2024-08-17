@@ -9,5 +9,8 @@ General conditions regarding Like/Dislike by DMF bot are under this topic.
 ## Terms of Use
 1. Do not intentionally break or tamper with the bot that causes an outage or causes the bot to go haywire.
 2. I reserve the right to prohibit any server or user from using my bot whenever I want.
-3. Data that Discord exposes to this bot can be analyzed and archived. 
+3. Data that Discord exposes to this bot can be analyzed and archived from your server. 
 4. I have the rights to update terms of service anytime with a notice in the support server.
+
+# Privacy Policy
+Any data that Discord and your server exposes to the bot is analyzed and archived. None of this data is shared or sold in any way.
