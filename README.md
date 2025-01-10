@@ -8,6 +8,8 @@
 This bot originally started as a tool for my own discord for the various art, video, meme, etc, channels where they're attachment heavy. The main point is to automatically add like/dislikes to all types of media posted on a discord server so nobody has to manually do it.
 
 [Click here to add the bot to your discord server](https://discord.com/api/oauth2/authorize?client_id=750646677219573770&permissions=292058115136&scope=bot)
+[Terms of Service](https://gist.github.com/rc4l/c75fb08ba389f002c6ef2b4ea5516853)
+[Privacy Policy](https://gist.github.com/rc4l/029b589c712419c2e2505a3f7cc17a63)
 
 [Click here to join the support server](https://discord.gg/jyCCFGJa6F)
 
@@ -84,7 +86,9 @@ This should all add up to `76864` within their bot permissions calculator inside
 5. Inside the `.env` file, within a new line, add the application id with the name DISCORD_APPLICATION_ID. For example: `DISCORD_APPLICATION_ID="YOUR APP ID GOES HERE"`.
 6. You are done and can now start the bot by running `npm run start`. Make sure it runs and is able to connect to a discord server.
 7. You'll notice slash commands don't work such as `/help`. To do that you'll need to run a custom script I made. It is already defined in package.json so to run it simply do `npm run updatecommands`.
-8. Run `npm run start` again. `/help` should now work as a valid command among others. You are now ready to develop :D
+8. Run `npm run start` again. `/help` should now work as a valid command among others. 
+9. (Once per server) Don't forget to invite the bot into your server. From the [Discord Developer Portal](https://discord.com/developers/applications) create an invite link, head back to the My Apps page under the "Applications" section, click on your bot application, and open the OAuth2 page and generate the url. Make sure the correct permissions are applied in the url link you're generating from the prerequisites section.
+10. You are now ready to develop =D
 
 ## Adding or removing /commands (slash commands)
 These steps need to be followed whenever a new command is added, removed, or if you modified anything aside from the `run` function within your command. The reason it's designed this way is because [there's a daily limit on command registration requests](https://discordjs.guide/creating-your-bot/command-deployment.html#command-registration) so simply running it every time on startup when we don't need to would eventually halt development for a day. Therefore this is a separate process entirely.
