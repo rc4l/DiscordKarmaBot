@@ -24,15 +24,15 @@ const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
 	cacheTime: 300,
 	excludeModels: ['Message'],
 	excludeMethods: [],
-	onHit: (key) => {
-		console.log('hit', key);
-	},
-	onMiss: (key) => {
-		console.log('miss', key);
-	},
-	onError: (key) => {
-		console.log('error', key);
-	},
+	// onHit: (key) => {
+	// 	console.log('hit', key);
+	// },
+	// onMiss: (key) => {
+	// 	console.log('miss', key);
+	// },
+	// onError: (key) => {
+	// 	console.log('error', key);
+	// },
 });
 
 
