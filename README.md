@@ -7,9 +7,7 @@
 
 This bot originally started as a tool for my own discord for the various art, video, meme, etc, channels where they're attachment heavy. The main point is to automatically add like/dislikes to all types of media posted on a discord server so nobody has to manually do it.
 
-[Click here to add the bot to your discord server](https://discord.com/api/oauth2/authorize?client_id=750646677219573770&permissions=292058115136&scope=bot)
-[Terms of Service](https://gist.github.com/rc4l/c75fb08ba389f002c6ef2b4ea5516853)
-[Privacy Policy](https://gist.github.com/rc4l/029b589c712419c2e2505a3f7cc17a63)
+[Click here to add the bot to your discord server](https://discord.com/api/oauth2/authorize?client_id=750646677219573770&permissions=292058115136&scope=bot) | <sup>[Terms of Service](https://gist.github.com/rc4l/c75fb08ba389f002c6ef2b4ea5516853) | [Privacy Policy](https://gist.github.com/rc4l/029b589c712419c2e2505a3f7cc17a63)</sup>
 
 [Click here to join the support server](https://discord.gg/jyCCFGJa6F)
 
